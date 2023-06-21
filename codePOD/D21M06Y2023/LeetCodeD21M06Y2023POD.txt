@@ -1,0 +1,115 @@
+Daily LeetCoding Challenge June, Day 21, 2023
+
+2448. Minimum Cost to Make Array Equal
+
+You are given two 0-indexed arrays nums and cost consisting each of n positive integers.
+
+You can do the following operation any number of times:
+
+Increase or decrease any element of the array nums by 1.
+The cost of doing one operation on the ith element is cost[i].
+
+Return the minimum total cost such that all the elements of the array nums become equal.
+
+ 
+
+Example 1:
+
+Input: nums = [1,3,5,2], cost = [2,3,1,14]
+Output: 8
+Explanation: We can make all the elements equal to 2 in the following way:
+- Increase the 0th element one time. The cost is 2.
+- Decrease the 1st element one time. The cost is 3.
+- Decrease the 2nd element three times. The cost is 1 + 1 + 1 = 3.
+The total cost is 2 + 3 + 3 = 8.
+It can be shown that we cannot make the array equal with a smaller cost.
+Example 2:
+
+Input: nums = [2,2,2,2,2], cost = [4,2,8,1,3]
+Output: 0
+Explanation: All the elements are already equal, so no operations are needed.
+ 
+
+Constraints:
+
+n == nums.length == cost.length
+1 <= n <= 105
+1 <= nums[i], cost[i] <= 106
+
+---------------------------------------------------------------------------------------------------
+Solution:
+***********Approach*************
+
+1. Start the function `findCost` with parameters `nums`, `cost`, and `x`.
+2. Initialize a variable `sum` as 0.
+3. Iterate over each element `num` in `nums`.
+   - Add the absolute difference between `x` and `num` multiplied by the corresponding element in `cost` to `sum`.
+4. Return the value of `sum`.
+5. Start the function `minCost` with parameters `nums` and `cost`.
+6. Set `n` as the size of `nums`.
+7. Initialize `mini` as the maximum possible integer value.
+8. Initialize `maxi` as the minimum possible integer value.
+9. Iterate over each element `num` in `nums`.
+   - Update `mini` as the minimum of `mini` and `num`.
+   - Update `maxi` as the maximum of `maxi` and `num`.
+10. Initialize `ans` as the maximum possible long long value.
+11. Perform a binary search using the variables `mini` and `maxi` as the lower and upper bounds.
+    - While `mini` is less than or equal to `maxi`:
+      - Calculate the midpoint `mid` as `mini + (maxi - mini) / 2`.
+      - Compute the cost for `mid` using the `findCost` function and store it in `temp`.
+      - Update `ans` as the minimum of `ans` and `temp`.
+      - Calculate the costs for `mid - 1` and `mid + 1` using the `findCost` function and store them in `l` and `r`.
+      - If `temp` is less than both `l` and `r`, return `ans`.
+      - If `temp` is less than `l` and greater than `r`, update `mini` as `mid + 1`.
+      - Otherwise, update `maxi` as `mid - 1`.
+12. Return `ans`.
+
+-------------------------------------------------------------------------------
+**# Complexity
+
+Time complexity:
+T.C=O(nlog(maxValue)). n times findCost function and log(maxValue) times binary search iteration.
+
+Space complexity:
+S.C=O(1) No extra space.
+**
+
+*******************Code****************** IN C++......................
+class Solution {
+public:
+long long findCost(vector<int>& nums, vector<int>& cost,long long x)
+{
+    long long sum=0;
+    for(int i=0;i<nums.size();i++)
+    {
+        sum+=abs(x-nums[i])*cost[i];
+    }
+    return sum;
+}
+    long long minCost(vector<int>& nums, vector<int>& cost) {
+        int n=nums.size();
+        int mini=INT_MAX;
+        int maxi=INT_MIN;
+        for(int i=0;i<n;i++)
+        {
+            mini=min(mini,nums[i]);
+            maxi=max(maxi,nums[i]);
+        }
+        long long ans=LLONG_MAX;
+        while(mini<=maxi)
+        {
+            long long mid=mini +(maxi-mini)/2;
+            long long temp=findCost(nums,cost,mid);
+            ans=min(ans,temp);
+            long long l=findCost(nums,cost,mid-1);
+            long long r=findCost(nums,cost,mid+1);
+            if(temp<l && temp<r)
+            return ans;
+            else if(temp<l && temp>r)
+            mini=mid+1;
+            else
+            maxi=mid-1;
+        }
+        return ans;
+    }
+};
