@@ -1,0 +1,77 @@
+Daily LeetCoding Challenge June, Day 27, 2023
+
+373. Find K Pairs with Smallest Sums
+
+Link: https://leetcode.com/problems/find-k-pairs-with-smallest-sums/
+
+
+---------------------------------------------------------------------------------------------------
+Solution:
+
+Intuition:
+C++,priority_queue(MIN HEAP) + SET.
+
+Approach:
+Create a min-heap priority queue named pq to store pairs. Each pair consists of the sum of two elements and the indices of those elements in nums1 and nums2.
+Create a set named st to keep track of visited pairs.
+Push the first pair into the priority queue pq. The sum is calculated by adding the first elements from nums1 and nums2, and the indices are set to (0, 0).
+Create a 2D vector named ans to store the resulting pairs.
+Get the sizes of nums1 and nums2 and assign them to n1 and n2, respectively.
+While k is greater than 0 and pq is not empty, do the following:
+Extract the top pair from the priority queue pq.
+Add a new pair to the ans vector, consisting of the elements from nums1 and nums2 at the corresponding indices.
+If the next element from nums1 (x1+1) is within the bounds of nums1, the next element from nums2 (x2) is within the bounds of nums2, and the pair (x1+1, x2) has not been visited before, then:
+Add the pair (x1+1, x2) to the set st.
+Calculate the sum by adding the elements from nums1 and nums2 at indices (x1+1, x2).
+Push this new pair into the priority queue pq.
+If the next element from nums1 (x1) is within the bounds of nums1, the next element from nums2 (x2+1) is within the bounds of nums2, and the pair (x1, x2+1) has not been visited before, then:
+Add the pair (x1, x2+1) to the set st.
+Calculate the sum by adding the elements from nums1 and nums2 at indices (x1, x2+1).
+Push this new pair into the priority queue pq.
+Decrement k by 1.
+Return the resulting vector ans containing the k smallest pairs.
+------------------
+Complexity:
+Time complexity:
+T.C=O(nlogn)
+
+Space complexity:
+O(n) in worst case.
+
+*******************Code****************** IN C++......................
+class Solution {
+public:
+    vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+        priority_queue<pair<int,pair<int,int>>,
+        vector<pair<int,pair<int,int>>>,
+        greater<pair<int,pair<int,int>>>>pq;
+        set<pair<int,int>>st;
+        pq.push({nums1[0]+nums2[0],{0,0}});
+        st.insert({0,0});
+        vector<vector<int>>ans;
+        int n1=nums1.size();
+        int n2=nums2.size();
+        while(k>0 && !pq.empty())
+        {
+            int val=pq.top().first;
+            int x1=pq.top().second.first;
+            int x2=pq.top().second.second;
+            pq.pop();
+            ans.push_back({nums1[x1],nums2[x2]});
+            if(x1+1<n1 && x2<n2 && st.find({x1+1,x2})==st.end())
+            {
+                st.insert({x1+1,x2});
+                int x=nums1[x1+1]+nums2[x2];
+                pq.push({x,{x1+1,x2}});
+            }
+            if(x1<n1 && x2+1<n2 && st.find({x1,x2+1})==st.end())
+            {
+                st.insert({x1,x2+1});
+                int x=nums1[x1]+nums2[x2+1];
+                pq.push({x,{x1,x2+1}});
+            }
+            k--;
+        }
+        return ans;
+    }
+};

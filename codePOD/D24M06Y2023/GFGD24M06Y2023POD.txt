@@ -1,0 +1,22 @@
+Problem GFG (Medium)
+Prefix match with other strings
+Question link: https://practice.geeksforgeeks.org/problems/prefix-match-with-other-strings/1
+
+
+Code: In C++:
+
+Time Complexity: O(N)
+Space Complexity: O(1)==constant
+
+int klengthpref(string arr[], int n, int k, string str){    
+        int x=str.size();
+        if(k>x)
+        return 0;
+        int count=0;
+        for(int i=0;i<n;i++)
+        {
+            if(str.substr(0,k)==arr[i].substr(0,k))
+            count++;
+        }
+        return count;
+    }

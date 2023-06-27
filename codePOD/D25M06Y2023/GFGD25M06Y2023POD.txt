@@ -1,0 +1,30 @@
+Problem GFG (Easy)
+Unique rows in boolean matrix
+Question link: https://practice.geeksforgeeks.org/problems/unique-rows-in-boolean-matrix/1
+
+
+Code: In C++:
+
+Time Complexity: O(row*col)
+Space Complexity: O(row*col)
+
+vector<vector<int>> uniqueRow(int M[MAX][MAX],int row,int col)
+    {
+        //Your code here
+        vector<vector<int>>ans;
+        set<vector<int>>st;
+        for(int i=0;i<row;i++)
+        {
+            vector<int>temp;
+            for(int j=0;j<col;j++)
+            {
+                temp.push_back(M[i][j]);
+            }
+            if(st.find(temp)==st.end())
+            {
+                ans.push_back(temp);
+                st.insert(temp);
+            }
+        }
+        return ans;
+    }

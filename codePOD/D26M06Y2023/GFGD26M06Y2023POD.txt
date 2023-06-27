@@ -1,0 +1,54 @@
+Problem GFG (Medium)
+nCr
+Question link: https://practice.geeksforgeeks.org/problems/ncr1019/1
+
+
+Code: In C++:
+Space Optimization
+Time Complexity: O(n*r)
+Space Complexity: O(r)
+
+int rec(int n,int r,vector<vector<int>>&dp,int mod)
+{
+if(r==0 || r==n)
+return 1;
+if(r>n)
+return 0;
+if(dp[n][r]!=0)
+return dp[n][r];
+return dp[n][r]=(rec(n-1,r-1,dp,mod) + rec(n-1,r,dp,mod))%mod;
+}
+    int nCr(int n, int r){
+        // code here
+        // vector<vector<int>>dp(n+1,vector<int>(r+1,0));
+        int mod=1e9 +7;
+        // return rec(n,r,dp,mod);
+        // tabulation
+        // for(int i=0;i<=n;i++)
+        // {
+        //     dp[i][0]=1;
+            
+        // }
+        // for(int i=1;i<=n;i++)
+        // {
+        //     for(int j=1;j<=r;j++)
+        //     {
+        //         dp[i][j]=(dp[i-1][j-1]+dp[i-1][j])%mod;
+        //     }
+        // }
+        // return dp[n][r];
+        // space optimization
+        if(n<r)
+        return 0;
+        vector<int>dp(r+1,0);
+        dp[0]=1;
+        for(int i=1;i<=n;i++)
+        {        
+            vector<int>temp(r+1,0);
+            for(int j=min(r,i);j>0;j--)
+            {
+                dp[j]=(dp[j-1]+dp[j])%mod;
+            }
+        }
+        return dp[r];
+    }

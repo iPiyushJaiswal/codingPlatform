@@ -1,0 +1,74 @@
+Daily LeetCoding Challenge June, Day 26, 2023
+
+2462. Total Cost to Hire K Workers
+Link: https://leetcode.com/problems/total-cost-to-hire-k-workers/
+
+
+---------------------------------------------------------------------------------------------------
+Solution:
+Intuition:
+No need to use 2 priority_queue use pair.
+
+Approach:
+Create a priority queue pq to store pairs of integers in ascending order. Each pair represents the cost and index of an element.
+Get the size of the input vector costs and initialize variables low, high, and cal to candidates - 1, 0, and 0, respectively.
+Iterate i from 0 to candidates - 1 and insert pairs {costs[i], i} into the priority queue pq.
+Iterate i from n - 1 (the last index of costs) to low (inclusive) and as long as the number of remaining elements to consider (n - 1 - i) is less than candidates.
+a. Insert pairs {costs[i], i} into the priority queue pq.
+b. Update the value of high to i.
+Initialize the variable ans to 0. This variable will store the total cost.
+Iterate i from 0 to k - 1 to select the top k elements from the priority queue pq.
+a. Get the value and index of the top element from the priority queue pq.
+b. Remove the top element from the priority queue pq.
+c. Add the value to ans.
+d. If the index is less than or equal to low and there are more elements between low and high, increment low and insert the corresponding element into the priority queue pq.
+e. If the index is greater than or equal to high and there are more elements between low and high, decrement high and insert the corresponding element into the priority queue pq.
+Return the final value of ans, which represents the total cost.
+
+Complexity:
+Time complexity:
+T.C=max(klogK + 2candidate) : k*logK=> k time loop run in iteration element push or pop take logK time.
+
+Space complexity:
+S.C=min(2*candidate,n), n=length of costs array.
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+    long long totalCost(vector<int>& costs, int k, int candidates) {
+        priority_queue<pair<int,int>,vector<pair<int,int>>,
+        greater<pair<int,int>>>pq;
+        // cost,index.
+        int n=costs.size();
+        int low=candidates-1;
+        int high=0;
+        int cal=0;
+        for(int i=0;i<candidates;i++)
+        pq.push({costs[i],i});
+        for(int i=n-1;i>low && (n-1-i)<candidates;i--)
+        {
+            pq.push({costs[i],i});
+            high=i;
+        }
+        long long ans=0;
+        for(int i=0;i<k;i++)
+        {
+                int val=pq.top().first;
+                int ind=pq.top().second;
+                pq.pop();
+                ans+=val;
+                if(ind<=low && low+1<high)
+                {
+                    low++;
+                    pq.push({costs[low],low});
+                }
+                else if(ind>=high && low+1<high)
+                {
+                    high--;
+                    pq.push({costs[high],high});
+                }
+        }
+        return ans;
+    }
+};

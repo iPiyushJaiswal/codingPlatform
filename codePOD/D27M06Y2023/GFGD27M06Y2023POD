@@ -1,0 +1,33 @@
+Problem GFG (Easy)
+Union of Two Linked Lists
+Question link: https://practice.geeksforgeeks.org/problems/union-of-two-linked-list/1
+
+
+Code: In C++:
+Space Optimization
+Time Complexity: O(n1+ n2)log(n1+n2)
+Space Complexity: O(n1+n2)
+
+struct Node* makeUnion(struct Node* head1, struct Node* head2)
+    {
+        // code here
+        set<int>st;
+        while(head1)
+        {
+            st.insert(head1->data);
+            head1=head1->next;
+        }
+        while(head2)
+        {
+            st.insert(head2->data);
+            head2=head2->next;
+        }
+        Node* dummy=new Node(-1);
+        Node* temp=dummy;
+        for(auto it:st)
+        {
+            temp->next=new Node(it);
+            temp=temp->next;
+        }
+        return dummy->next;
+    }
