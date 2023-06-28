@@ -1,5 +1,5 @@
 Problem GFG (Easy)
-Maximum Depth Of Binary Tree
+Maximum Depth Of Binary Tree 
 Question link: https://practice.geeksforgeeks.org/problems/maximum-depth-of-binary-tree/1
 
 
