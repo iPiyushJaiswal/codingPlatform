@@ -1,0 +1,24 @@
+Problem GFG (Easy)
+Maximum Depth Of Binary Tree
+Question link: https://practice.geeksforgeeks.org/problems/maximum-depth-of-binary-tree/1
+
+
+Code: In C++:
+Space Optimization
+Time Complexity: O(n)
+Space Complexity: O(h) h=height of tree. In worst case skewed tree so n.
+
+class Solution{
+  public:
+    /*You are required to complete this method*/
+    int rec(Node* root)
+    {
+        if(!root)
+        return 0;
+        return 1 + max(rec(root->left),rec(root->right));
+    }
+    int maxDepth(Node *root) {
+        // Your code here
+        return rec(root);;
+    }
+};
