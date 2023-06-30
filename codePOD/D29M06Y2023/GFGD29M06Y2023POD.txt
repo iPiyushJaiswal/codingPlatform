@@ -1,0 +1,54 @@
+Problem GFG (HARD)
+Next Happy Number
+Question link: https://practice.geeksforgeeks.org/problems/next-happy-number4538/1
+
+
+Code: In C++:
+Space Optimization
+Time Complexity: O(n)
+Space Complexity: O(n) 
+
+----------------
+CODE IN C++
+----------------
+
+int isSum(int t)
+{
+    int sD=0;
+    while(t!=0)
+    {
+        int r=t%10;
+        sD+=r*r;
+        t=t/10;
+    }
+    return sD;
+}
+bool isHappy(int x)
+{
+    unordered_set<int>st;
+    int t=x;
+    while(true)
+    {
+        int s=isSum(t);
+        if(s==1)
+        return true;
+        if(st.find(s)!=st.end())
+        return false;
+        else
+        st.insert(s);
+        t=s;
+    }
+    return false;
+}
+    int nextHappy(int N){
+        // code here
+        int ans=N+1;
+        while(true)
+        {
+            if(isHappy(ans))
+            return ans;
+            else
+            ans++;
+        }
+        return ans;
+    }
