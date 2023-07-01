@@ -1,0 +1,26 @@
+Problem GFG (Easy)
+Number of 1 Bits
+Question link: https://practice.geeksforgeeks.org/problems/set-bits0143/1
+
+
+Code: In C++:
+Complexity: 
+
+T.C=O(32) , S.C=O(1) constant
+
+
+----------------
+CODE IN C++
+----------------
+int setBits(int N) {
+        // Write Your Code here
+        int ans=0;
+        int i=0;
+        while(i<32)
+        {
+            if((N>>i)&1)
+            ans++;
+            i++;
+        }
+        return ans;
+    }
