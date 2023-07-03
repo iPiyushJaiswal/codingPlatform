@@ -1,0 +1,24 @@
+Problem GFG (Easy)
+Copy Set Bits in Range
+Question link: https://practice.geeksforgeeks.org/problems/copy-set-bits-in-range0623/1
+
+
+Code: In C++:
+Complexity: 
+
+T.C=O(32) , S.C=O(1) constant
+
+
+----------------
+CODE IN C++
+----------------
+int setSetBit(int x, int y, int l, int r){
+        // code here
+        l--;
+        while(l<r)
+        {
+            x=x|((1<<l)&y);
+            l++;
+        }
+        return x;
+    }
