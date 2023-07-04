@@ -1,0 +1,64 @@
+Daily LeetCoding Challenge July, Day 04, 2023
+
+137. Single Number II
+
+Link: https://leetcode.com/problems/single-number-ii/description/
+
+
+---------------------------------------------------------------------------------------------------
+Solution:
+
+# Intuition
+C++, Bit manipulation. Easy 7 line code.
+
+# Approach
+
+1. Declare a variable `n` and assign it the value of the size of the input vector `nums`.
+
+2. Declare an integer variable `ans` and initialize it to 0. This variable will hold the final result.
+
+3. Iterate from `i = 0` to `i < 32`. This loop iterates through each bit position of the numbers.
+
+4. Inside the loop, declare an integer variable `count` and set it to 0. This variable will count the number of occurrences of the current bit position.
+
+5. Iterate through each element `nums[j]` in the input vector.
+
+6. Inside the nested loop, check if the `i`-th bit of `nums[j]` is set (1) using the bitwise right shift operator `>>` and the bitwise AND operator `&` with 1. If the condition is true, increment `count` by 1.
+
+7. After counting the occurrences of the `i`-th bit in all numbers, check if `count` is not divisible by 3 (i.e., `count % 3 != 0`). This condition checks if the bit position has occurred an odd number of times.
+
+8. If the condition is true, set the `i`-th bit of `ans` to 1 using the bitwise OR operator `|` and the left shift operator `<<`. This operation effectively updates the `ans` variable with the `i`-th bit set.
+
+9. Repeat steps 3 to 8 for all bit positions.
+
+10. After the loop finishes, the `ans` variable will hold the binary representation of the single number that appears only once.
+
+11. Return the `ans` variable, which represents the decimal value of the single number.
+
+-------------------------------------
+# Complexity
+- Time complexity:
+T.C=O(32*n) n= number of elements. ==O(n)
+
+- Space complexity:
+S.C=O(1) constant
+--------------------------------------
+
+
+*******************Code****************** IN C++......................
+int singleNumber(vector<int>& nums) {
+        int n=nums.size();
+        int ans=0;
+        for(int i=0;i<32;i++)
+        {
+            int count=0;
+            for(int j=0;j<n;j++)
+            {
+                if((nums[j]>>i)&1)
+                count++;
+            }
+            if(count%3 !=0)
+            ans=ans|(1<<i);
+        }
+        return ans;
+    }
