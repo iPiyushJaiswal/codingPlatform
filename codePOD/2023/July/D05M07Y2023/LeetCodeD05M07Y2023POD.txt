@@ -1,0 +1,57 @@
+Daily LeetCoding Challenge July, Day 05, 2023
+
+Problem Type: (Medium)
+
+1493. Longest Subarray of 1's After Deleting One Element
+
+Link: https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/
+
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+
+Approach
+Allow upto 1 zero.
+C++ Sliding window
+
+-------------------------------------
+
+
+# Complexity
+Time complexity:
+T.C=O(n) In worst case upto 2n. n for low and n for high.Total(n+n)
+
+Space complexity:
+S.C=O(1) constant.
+
+--------------------------------------
+
+
+*******************Code****************** IN C++......................
+
+int longestSubarray(vector<int>& nums) {
+        int n=nums.size();
+        int low=0;
+        int high=0;
+        int cntZero=0;
+        int ans=0;
+        while(high<n)
+        {
+        if(nums[high]==0)
+            {
+                cntZero++;
+            }
+                while(cntZero>1)
+                {
+                    if(nums[low]==0)
+                    {
+                        cntZero--;
+                    }
+                    low++;
+                }
+            ans=max(ans,high-low);
+            high++;
+        }
+        return ans;
+    }

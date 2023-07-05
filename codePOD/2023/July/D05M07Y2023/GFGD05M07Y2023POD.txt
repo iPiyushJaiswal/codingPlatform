@@ -1,0 +1,82 @@
+Problem GFG (Medium)
+Stock buy and sell II
+
+
+Question link: https://practice.geeksforgeeks.org/problems/stock-buy-and-sell2615/1
+
+
+Code: In C++:
+Complexity: 
+
+Solution a: recursion T.C=exponential , S.C=O(n) 
+Solution b: Memoization T.C=O(n*2) , S.C=O(n*2) dp vector. + O(n) recursive stack 
+Solution c: Tabulation T.C=O(n*2) , S.C=O(n*2) dp vector.
+Solution d: Space optimization  T.C=O(n*2) , S.C=O(2) constant.
+----------------
+CODE IN C++ DP.
+----------------
+int rec(int buy,int ind,int n, vector<int> &prices)
+  {
+      if(ind==n)
+      return 0;
+      int ans;
+      if(buy==1)
+      ans=max(-prices[ind] + rec(0,ind+1,n,prices),
+      rec(1,ind+1,n,prices));
+      else
+      ans=max(prices[ind] + rec(1,ind+1,n,prices),
+      rec(0,ind+1,n,prices));
+      return ans;
+  }
+   int rec1(int buy,int ind,int n, vector<int> &prices,
+   vector<vector<int>>&dp)
+  {
+      if(ind==n)
+      return 0;
+      int ans;
+      if(dp[ind][buy]!=0)
+      return dp[ind][buy];
+      if(buy==1)
+      ans=max(-prices[ind] + rec1(0,ind+1,n,prices,dp),
+      rec1(1,ind+1,n,prices,dp));
+      else
+      ans=max(prices[ind] + rec1(1,ind+1,n,prices,dp),
+      rec1(0,ind+1,n,prices,dp));
+      return dp[ind][buy]=ans;
+  }
+    int stockBuyAndSell(int n, vector<int> &prices) {
+        // code here
+        // return rec(1,0,n,prices);
+        
+        // memoizaton 
+        // vector<vector<int>>dp(n+1,vector<int>(2,0));
+        // return rec1(1,0,n,prices,dp);
+        
+        // tabulation
+//         vector<vector<int>>dp(n+1,vector<int>(2,0));
+//         for(int ind=n-1;ind>=0;ind--)
+//         {
+//             for(int buy=0;buy<=1;buy++)
+//             {
+//               if(buy==1)
+// dp[ind][buy]=max(-prices[ind] + dp[ind+1][!buy],dp[ind+1][buy]);
+//               else
+// dp[ind][buy]=max(prices[ind] + dp[ind+1][!buy],dp[ind+1][buy]);
+//             }
+//         }
+//         return dp[0][1];
+
+// Space optimization
+        vector<int>dp(2,0);
+        for(int ind=n-1;ind>=0;ind--)
+        {
+            for(int buy=0;buy<=1;buy++)
+            {
+              if(buy==1)
+                dp[buy]=max(-prices[ind] + dp[!buy],dp[buy]);
+              else
+                dp[buy]=max(prices[ind] + dp[!buy],dp[buy]);
+            }
+        }
+        return dp[1];
+    }
