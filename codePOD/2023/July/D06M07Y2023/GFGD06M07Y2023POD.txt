@@ -1,0 +1,39 @@
+Problem GFG (Medium)
+Quick Sort
+
+Question link: https://practice.geeksforgeeks.org/problems/quick-sort/1
+
+
+Code: In C++:
+Complexity: 
+
+T.C= Worst Case O(n*2) , Average Case =O(nlogn)
+S.C=O(n). recursive stack.
+----------------
+CODE IN C++ DP.
+----------------
+void quickSort(int arr[], int low, int high)
+    {
+        // code here
+        if(low>=high)
+        return;
+        int pivot=partition(arr,low,high);
+        quickSort(arr,low,pivot-1);
+        quickSort(arr,pivot+1,high);
+    }
+	int partition (int arr[], int low, int high)
+    {
+       // Your code here
+       int piv=arr[high];
+       int l=low;
+       for(int h=low;h<high;h++)
+       {
+           if(arr[h]<=piv)
+           {
+               swap(arr[l],arr[h]);
+               l++;
+           }
+       }
+       swap(arr[l],arr[high]);
+       return l;
+    }
