@@ -1,0 +1,84 @@
+Daily LeetCoding Challenge July, Day 06, 2023
+
+Problem Type: (Medium)
+
+209. Minimum Size Subarray Sum
+
+
+Link: https://leetcode.com/problems/minimum-size-subarray-sum/
+
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+
+Approach
+C++ Sliding window
+
+-------------------------------------
+
+
+# Complexity
+
+Brute force:
+
+T.C=O(n*n)
+
+S.C=O(1) constant.
+
+Optimal:
+
+T.C=O(n) In worst case upto 2n. n for low and n for high.Total(n+n)
+
+S.C=O(1) constant.
+
+--------------------------------------
+
+
+*******************Code****************** IN C++......................
+Brute Force:
+
+int minSubArrayLen(int target, vector<int>& nums) {
+        int n=nums.size();
+        int ans=INT_MAX;
+        for(int i=0;i<n;i++)
+        {
+            int val=0;
+            for(int j=i;j<n;j++)
+            {
+                val+=nums[j];
+                if(val>=target)
+                {
+                    ans=min(ans,j-i+1);
+                    break;
+                }
+            }
+        }
+        if(ans==INT_MAX)
+        return 0;
+        return ans;
+    }
+-----------------------------------------------------------------------
+
+//Optimal Solution 
+int minSubArrayLen(int target, vector<int>& nums) {
+        int n=nums.size();
+        int ans=INT_MAX;
+        int low=0;
+        int high=0;
+        int sum=0;
+        while(high<n)
+        {
+            sum+=nums[high];
+            while(low<=high && sum>=target)
+            {
+                ans=min(ans,high-low+1);
+                sum-=nums[low];
+                low++;
+            }
+            high++;
+        }
+        if(ans==INT_MAX)
+        return 0;
+        return ans;
+    }
