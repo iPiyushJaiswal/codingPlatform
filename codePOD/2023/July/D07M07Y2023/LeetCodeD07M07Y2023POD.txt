@@ -1,0 +1,107 @@
+Daily LeetCoding Challenge July, Day 07, 2023
+
+Problem Type: (Medium)
+
+2024. Maximize the Confusion of an Exam
+
+Link: https://leetcode.com/problems/maximize-the-confusion-of-an-exam/description/
+
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+
+#Approach
+
+Apply sliding window.
+Run from 0 to n for 2 times . for both True and False.
+
+-------------------------------------
+
+
+#Complexity
+Brute Force + Optimal
+Time complexity:
+T.C=O(2n) two time function call which run till n. for 'T' and 'F'.
+
+Space complexity:
+S.C=O(1)
+
+--------------------------------------
+
+
+*******************Code****************** IN C++......................
+Brute Force: write 2 loop
+
+int maxConsecutiveAnswers(string answerKey, int k) {
+        int low=0;
+        int n=answerKey.size();
+        int high=0;
+        int ans=0;
+        int count=0;
+        while(high<n)
+        {
+            if(answerKey[high]=='F')
+            {
+                count++;
+            }
+            while(count>k)
+            {
+                if(answerKey[low]=='F')
+                count--;
+                low++;
+            }
+            ans=max(ans,high-low+1); 
+            high++;  
+        }
+        low=0;
+        high=0;
+        count=0;
+        while(high<n)
+        {
+            if(answerKey[high]=='T')
+            {
+                count++;
+            }
+            while(count>k)
+            {
+                if(answerKey[low]=='T')
+                count--;
+                low++;
+            }
+            ans=max(ans,high-low+1); 
+            high++;  
+        }
+        return ans;
+    }
+-----------------------------------------------------------------------
+
+//Optimal Solution 
+int fun(string answerKey, int k,int n,char ch)
+{
+        int ans=0;
+        int count=0;
+        int low=0;
+        int high=0;
+        while(high<n)
+        {
+            if(answerKey[high]==ch)
+            {
+                count++;
+            }
+            while(count>k)
+            {
+                if(answerKey[low]==ch)
+                count--;
+                low++;
+            }
+            ans=max(ans,high-low+1); 
+            high++;  
+        }
+        return ans;
+}
+    int maxConsecutiveAnswers(string answerKey, int k) {
+        return max(fun(answerKey,k,answerKey.size(),'T'),
+        fun(answerKey,k,answerKey.size(),'F'));
+    }
+	
