@@ -1,0 +1,39 @@
+Problem GFG (Medium) Very Important Question
+Smallest Positive missing number
+
+Question link: https://practice.geeksforgeeks.org/problems/smallest-positive-missing-number-1587115621/1
+
+
+Code: In C++:
+Complexity: 
+
+T.C= (n)
+S.C=O(1)
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+int missingNumber(int arr[], int n) 
+    { 
+        // Your code here
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i]>0 && arr[i]<=n)
+            {
+                int ele=arr[i];
+                int chair=ele-1;
+                if(arr[chair]!=ele)
+                {
+                    swap(arr[chair],arr[i]);
+                    i--;
+                }
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i]!=i+1)
+            return i+1;
+        }
+        return n+1;
+    }
