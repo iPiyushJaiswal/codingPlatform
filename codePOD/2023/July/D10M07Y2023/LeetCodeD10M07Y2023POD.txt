@@ -1,0 +1,53 @@
+Daily LeetCoding Challenge July, Day 10, 2023
+
+Problem Type: (Easy)
+
+111. Minimum Depth of Binary Tree
+
+Link: https://leetcode.com/problems/minimum-depth-of-binary-tree/description/
+
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+
+#Approach
+DFS (PreOrder) traversal. 
+
+-------------------------------------
+
+#Complexity
+
+Time complexity:
+T.C=O(n) two time function call which run till n. for 'T' and 'F'.
+
+Space complexity:
+S.C=O(h). h=height of binary tree. In worst case upto "n" for skewed tree.
+
+--------------------------------------
+
+*******************Code****************** IN C++......................
+
+
+class Solution {
+public:
+void rec(TreeNode* root,int &ans,int lvl)
+{
+    if(!root)
+    return;
+    if(!root->left && !root->right)
+    {
+        ans=min(ans,lvl);
+        return;
+    }
+    rec(root->left,ans,lvl+1);
+    rec(root->right,ans,lvl+1);
+}
+    int minDepth(TreeNode* root) {
+        if(!root)
+        return 0;
+        int ans=INT_MAX;
+        rec(root,ans,1);
+        return ans;
+    }
+};
