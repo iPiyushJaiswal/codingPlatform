@@ -1,0 +1,25 @@
+Problem GFG (Easy)
+Transpose of Matrix
+
+Question link: https://practice.geeksforgeeks.org/problems/transpose-of-matrix-1587115621/1
+
+
+Code: In C++:
+Complexity: 
+
+T.C= (n*n)
+S.C=O(1)
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+void transpose(vector<vector<int> >& matrix, int n)
+    { 
+        // code here 
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            swap(matrix[i][j],matrix[j][i]);
+        }
+    }
