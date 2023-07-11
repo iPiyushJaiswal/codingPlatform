@@ -1,0 +1,64 @@
+Problem GFG (Medium)
+Find kth element of spiral matrix
+
+Question link: https://practice.geeksforgeeks.org/problems/find-nth-element-of-spiral-matrix/1
+
+
+Code: In C++:
+Complexity: 
+
+T.C= (n*m)
+S.C=O(1)
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+int findK(int a[MAX][MAX],int n,int m,int k)
+    {
+ 		// Your code goes here.
+ 		if(n*m<k)
+ 		return -1;
+ 		int rL=0;
+ 		int rH=n;
+ 		int cL=0;
+ 		int cH=m;
+ 		while(rL<rH && cL<cH)
+ 		{
+ 		    for(int i=cL;i<cH;i++)
+ 		    {
+ 		        if(k==1)
+ 		        return a[rL][i];
+ 		        k--;
+ 		    }
+ 		    rL++;
+ 		    for(int i=rL;i<rH;i++)
+ 		    {
+ 		        if(k==1)
+ 		        return a[i][cH-1];
+ 		        k--;
+ 		    }
+ 		    cH--;
+ 		    if(rL<rH)
+ 		    {
+ 		        for(int i=cH-1;i>=cL;i--)
+ 		        {
+     		        if(k==1)
+     		        return a[rH-1][i];
+ 		            k--;
+ 		        }
+ 		        rH--;
+ 		    }
+ 		    if(cL<cH)
+ 		    {
+ 		        for(int i=rH-1;i>=rL;i--)
+ 		        {
+     		        if(k==1)
+     		        return a[i][cL];
+ 		            k--;
+ 		        }
+ 		        cL++;
+ 		    }
+ 		}
+ 		return -1;
+    }
