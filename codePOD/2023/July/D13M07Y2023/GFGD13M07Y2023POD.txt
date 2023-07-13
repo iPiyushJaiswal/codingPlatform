@@ -1,0 +1,30 @@
+Problem GFG (Easy)
+Unique Number of Occurrences
+
+Question link: https://practice.geeksforgeeks.org/problems/unique-frequencies-of-not/1
+
+
+Code: In C++:
+Complexity: 
+
+T.C= (n)
+S.C=O(2n) worst case .
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+bool isFrequencyUnique(int n, int arr[])
+    {
+        unordered_map<int,int>mp;
+        for(int i=0;i<n;i++)
+        mp[arr[i]]++;
+        set<int>st;
+        for(auto it:mp)
+        {
+            if(st.find(it.second)!=st.end())
+            return false;
+            st.insert(it.second);
+        }
+        return true;
+    }
