@@ -1,0 +1,41 @@
+Problem GFG (Medium)
+Power Of Numbers
+
+Question link: https://practice.geeksforgeeks.org/problems/power-of-numbers-1587115620/1
+
+
+Code: In C++:
+Complexity: 
+
+T.C= (logR)
+S.C=O(logR) recursive stack.
+if we do iterative we can save recursive stack.
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+	int mod=1e9 +7;
+    long long rec(int N,int R)
+    {
+        if(N==0)
+        return 0;
+        if(R==0)
+        return 1;
+        long long ans;
+        if(R%2==0)
+        {
+            ans=rec(N,R/2)%mod;
+            ans=(ans*ans)%mod;
+        }
+        else
+        {
+            ans=N*rec(N,R-1);
+        }
+        return ans%mod;
+    }
+    long long power(int N,int R)
+    {
+       //Your code here
+        return rec(N,R)%mod;
+    }
