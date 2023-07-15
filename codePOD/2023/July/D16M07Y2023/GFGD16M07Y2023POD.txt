@@ -1,0 +1,34 @@
+Problem GFG (Basic)
+Queue Reversal
+
+Question link: https://practice.geeksforgeeks.org/problems/queue-reversal/1
+
+Code: In C++:
+Complexity: 
+
+T.C= (n) n=size of queue
+S.C=O(n) recursive space.
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+class Solution
+{
+    public:
+    void rec(queue<int>&q)
+    {
+        if(q.empty())
+        return;
+        int val=q.front();
+        q.pop();
+        rec(q);
+        q.push(val);
+    }
+    queue<int> rev(queue<int> q)
+    {
+        // add code here.
+        rec(q);
+        return q;
+    }
+};
