@@ -1,0 +1,42 @@
+Problem GFG (Easy)
+Delete middle element of a stack
+
+Question link: https://practice.geeksforgeeks.org/problems/delete-middle-element-of-a-stack/1
+
+
+Code: In C++:
+Complexity: 
+
+T.C= (n/2)
+S.C=O(n/2) recursive space.
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+class Solution
+{
+    public:
+    //Function to delete middle element of a stack.
+    void rec(stack<int>&s,int &k)
+    {
+        if(k==0)
+        {
+            s.pop();
+            return;
+        }
+        int x=s.top();
+        s.pop();
+        k--;
+        rec(s,k);
+        s.push(x);
+    }
+    void deleteMid(stack<int>&s, int sizeOfStack)
+    {
+        // code here.. 
+        if(sizeOfStack==0)
+        return;
+        int k=sizeOfStack/2;
+        rec(s,k);
+    }
+};
