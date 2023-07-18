@@ -1,0 +1,69 @@
+Problem Type: (Medium)
+
+445. Add Two Numbers II
+
+
+Link: https://leetcode.com/problems/add-two-numbers-ii/
+
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+-------------------------------------
+
+#Complexity
+
+Time complexity:
+T.C=O(n) 
+
+Space complexity:
+S.C=O(n).
+
+--------------------------------------
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+    ListNode* reverse(ListNode* l)
+    {
+        ListNode* prev=NULL;
+        ListNode* curr=l;
+        ListNode* nxt;
+        while(curr)
+        {
+            nxt=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=nxt;
+        }
+        return prev;
+    }
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        l1=reverse(l1);
+        l2=reverse(l2);
+        
+        ListNode* i=l1;
+        ListNode* j=l2;
+        int sum=0;
+        ListNode* ans=NULL;
+        while(i || j || sum>0)
+        {
+            if(i)
+            {
+                sum+=i->val;
+                i=i->next;
+            }
+            if(j)
+            {
+                sum+=j->val;
+                j=j->next;
+            }
+            ListNode* newNode=new ListNode(sum%10);
+                newNode->next=ans;
+                ans=newNode;
+            sum/=10;
+        }
+        return ans;
+    }
+};
