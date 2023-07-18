@@ -1,0 +1,104 @@
+Problem Type: (Medium)
+
+146. LRU Cache
+
+
+Link: https://leetcode.com/problems/lru-cache/description/
+
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+-------------------------------------
+
+#Complexity
+
+Time complexity:
+T.C=O(n) 
+
+Space complexity:
+S.C=O(n).
+
+--------------------------------------
+
+*******************Code****************** IN C++......................
+
+class LRUCache {
+public:
+class Node{
+    public:
+    int key;
+    int val;
+    Node* prev;
+    Node* next;
+    Node(int key_,int value)
+    {
+        key=key_;
+        val=value;
+    }
+};
+    Node* head=new Node(-1,-1);
+    Node* tail=new Node(-1,-1);
+    unordered_map<int,Node*>mp;
+    int cap;
+    LRUCache(int capacity) {
+        cap=capacity;
+        head->next=tail;
+        tail->prev=head;
+    }
+    void deleteNode(Node* temp)
+    {
+        temp->prev->next=temp->next;
+        temp->next->prev=temp->prev;
+    }
+    void addNode(Node* temp)
+    {
+        temp->next=head->next;
+        temp->prev=head;
+        head->next=temp;
+        temp->next->prev=temp;
+    }
+    int get(int key_) {
+     if(mp.find(key_)==mp.end())
+     return -1;
+     Node* temp=mp[key_];
+     int ans=temp->val;
+     mp.erase(key_);
+     deleteNode(temp);
+     addNode(temp);
+     mp[key_]=head->next;
+     return ans;
+    }
+    
+    void put(int key_, int value) {
+        if(mp.find(key_)==mp.end())
+        {
+            if(mp.size()<cap)
+            {
+                Node* newNode=new Node(key_,value);
+                addNode(newNode);
+                mp[key_]=head->next;
+            }
+            else
+            {
+                int k=tail->prev->key;
+                Node* temp=mp[k];
+                deleteNode(temp);
+                mp.erase(k);
+                Node* newNode=new Node(key_,value);
+                addNode(newNode);
+                mp[key_]=head->next;
+            }
+        }
+        else
+        {
+            Node* temp=mp[key_];
+            mp.erase(key_);
+            deleteNode(temp);
+            delete(temp);
+            Node* newNode=new Node(key_,value);
+            addNode(newNode);
+            mp[key_]=head->next;
+        }
+    }
+};
