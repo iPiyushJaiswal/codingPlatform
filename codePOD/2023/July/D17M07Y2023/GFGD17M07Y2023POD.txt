@@ -1,0 +1,35 @@
+Problem GFG (Medium)
+First non-repeating character in a stream
+
+Question link: https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1
+
+Code: In C++:
+Complexity: 
+
+T.C= (n) 
+S.C=O(n) unordered_map.
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+string FirstNonRepeating(string A){
+		    // Code here
+		    int low=0;
+		    int high=0;
+		    int n=A.size();
+		    string ans="";
+		    unordered_map<char,int>mp;
+		    while(high<n)
+		    {
+		        mp[A[high]]++;
+		        while(low<high && mp[A[low]]>1)
+		        low++;
+		        if(mp[A[low]]>1)
+		        ans.push_back('#');
+		        else
+		        ans.push_back(A[low]);
+		        high++;
+		    }
+		    return ans;
+		}
