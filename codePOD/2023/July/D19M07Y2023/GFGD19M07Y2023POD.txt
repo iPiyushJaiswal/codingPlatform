@@ -1,0 +1,89 @@
+Problem GFG (Medium)
+Longest Palindromic Subsequence
+
+Question link: https://practice.geeksforgeeks.org/problems/longest-palindromic-subsequence-1612327878/1
+
+Code: In C++:
+Complexity: 
+
+C++ 4 approach:
+1- recursion TLE: T.C=exponential S.C=O(n) recursive stack:
+
+2- memoization Tle: T.C=O(n*n)
+S.C=O(n*n)dp vector + O(n)recursive stack:
+
+3- tabulation worked: T.C=O(n*n) S.C=O(n*n)dp vector 
+
+4-space optimization T.C=O(n*n) S.C=O(2n)vector 
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution{
+  public:
+  int rec(string A,string B,int i,int j,int n)
+  {
+      if(i==n || j==n)
+      return 0;
+      if(A[i]==B[j])
+      return 1 + rec(A,B,i+1,j+1,n);
+      return max(rec(A,B,i+1,j,n),rec(A,B,i,j+1,n));
+  }
+  int rec1(string A,string B,int i,int j,int n,
+  vector<vector<int>>&dp)
+  {
+      if(i==n || j==n)
+      return 0;
+      if(A[i]==B[j])
+      return dp[i][j]=1 + rec1(A,B,i+1,j+1,n,dp);
+      return dp[i][j]=max(rec1(A,B,i+1,j,n,dp),rec1(A,B,i,j+1,n,dp));
+  }
+    int longestPalinSubseq(string A) {
+        //code here
+        string B=A;
+        int n=A.size();
+        for(int i=0;i<n/2;i++)
+        swap(B[i],B[n-i-1]);
+        
+        // recursion
+        // return rec(A,B,0,0,n);
+        
+        // memoization
+        // vector<vector<int>>dp(n,vector<int>(n,0));
+        // return rec1(A,B,0,0,n,dp);
+        
+        // tabulation
+        // vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+        // for(int i=n-1;i>=0;i--)
+        // {
+        //     for(int j=n-1;j>=0;j--)
+        //     {
+        //         if(A[i]==B[j])
+        //           dp[i][j]=1 + dp[i+1][j+1];
+        //         else
+        //           dp[i][j]=max(dp[i+1][j],dp[i][j+1]);
+
+        //     }
+        // }
+        // return dp[0][0];
+        
+        // space optimization:
+        vector<int>dp(n+1,0);
+        vector<int>temp(n+1,0);
+        for(int i=n-1;i>=0;i--)
+        {
+            for(int j=n-1;j>=0;j--)
+            {
+                if(A[i]==B[j])
+                  temp[j]=1 + dp[j+1];
+                else
+                  temp[j]=max(dp[j],temp[j+1]);
+
+            }
+            dp=temp;
+        }
+        return dp[0];
+    }
+};
