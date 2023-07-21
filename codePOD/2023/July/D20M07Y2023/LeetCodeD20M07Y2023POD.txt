@@ -1,0 +1,88 @@
+Problem Type: (Medium)
+
+735. Asteroid Collision
+
+Link: https://leetcode.com/problems/asteroid-collision/
+
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+-------------------------------------
+
+#Complexity
+
+Time complexity:
+Method 1: Using stack: T.C= O(n)
+//Method 2: Optimal: T.C= O(n)
+
+Space complexity:
+Method 1: Using stack: S.C= O(n)
+//Method 2: Optimal: S.C= O(1)
+
+--------------------------------------
+
+*******************Code****************** IN C++......................
+
+//Method 1: Using stack:
+
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        stack<int>st;
+        int i=0;
+        while(i<asteroids.size())
+        {
+            int flag=false;
+            while(!st.empty() && asteroids[i]<0 && st.top()>0 && 
+            st.top()<=-asteroids[i] && flag==false)
+            {
+                if(st.top()==-asteroids[i])
+                flag=true;
+                st.pop();
+            }
+            if((flag==false && st.empty())  || 
+            (!st.empty() && st.top()<0 && flag==false)
+            || asteroids[i]>=0)
+            st.push(asteroids[i]);
+            i++;
+        }
+        int n=st.size();
+        if(n==0)
+        return {};
+        vector<int>ans(n);
+        int j=0;
+        while(!st.empty())
+        {
+            ans[n-j-1]=st.top();
+            st.pop();
+            j++;
+        }
+        return ans;
+    }
+};
+
+//Method 2: Optimal
+
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        vector<int>ans;
+        for(auto it:asteroids)
+        {
+            bool destroyed=false;
+            while(ans.size() && ans.back()>0 && it<0 && destroyed==false)
+            {
+                if(ans.back()>=-it)
+                destroyed=true;
+                if(ans.back()<=-it)
+                ans.pop_back();
+            }
+            if(destroyed==false)
+            ans.push_back(it);
+        }
+        return ans;
+    }
+};
+
+
