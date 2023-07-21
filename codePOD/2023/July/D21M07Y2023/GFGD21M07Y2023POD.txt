@@ -1,0 +1,42 @@
+Problem GFG (Medium)
+Reverse a Linked List in groups of given size
+
+
+Question link: https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
+
+Code: In C++:
+Complexity: 
+
+T.C=O(n) 
+S.C=O(k) k blocks recursive stack. 
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution
+{
+    public:
+    struct node *reverse (struct node *head, int k)
+    { 
+        // Complete this method
+        node *nex;
+        node *prev=NULL;
+        node *curr=head;
+        int x=0;
+        while(curr && x<k)
+        {
+            nex=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=nex;
+            x++;
+        }
+        if(nex)
+            head->next=reverse(nex,k);
+        
+        return prev;
+    }
+};
