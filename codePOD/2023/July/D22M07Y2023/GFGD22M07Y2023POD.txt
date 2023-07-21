@@ -1,0 +1,45 @@
+Problem GFG (Easy)
+Remove duplicates from an unsorted linked list
+
+
+Question link: https://practice.geeksforgeeks.org/problems/remove-duplicates-from-an-unsorted-linked-list/1
+
+Code: In C++:
+Complexity: 
+
+T.C=O(n) 
+S.C=O(n) set.
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution
+{
+    public:
+    //Function to remove duplicates from unsorted linked list.
+    Node * removeDuplicates( Node *head) 
+    {
+     // your code goes here
+     if(!head)
+     return head;
+     set<int>st;
+     Node* temp1=head;
+     Node* temp2=head->next;
+     st.insert(head->data);
+     while(temp2)
+     {
+         if(st.find(temp2->data)==st.end())
+         {
+             temp1->next->data=temp2->data;
+             st.insert(temp2->data);
+             temp1=temp1->next;
+         }
+         temp2=temp2->next;
+     }
+     temp1->next=NULL;
+     return head;
+    }
+};
