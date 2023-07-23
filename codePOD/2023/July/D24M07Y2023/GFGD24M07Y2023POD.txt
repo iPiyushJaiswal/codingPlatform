@@ -1,0 +1,72 @@
+Problem GFG (Easy)
+Right View of Binary Tree
+
+Question link: https://practice.geeksforgeeks.org/problems/right-view-of-binary-tree/1
+
+Code: In C++:
+Complexity: 
+
+Method1: BFS
+T.C=O(n) 
+S.C=O(n) queue for traversal.
+
+Method2: Modified DFS 
+T.C=O(n) 
+S.C=O(n) Recursive stack.
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+Method1: BFS
+class Solution
+{
+    public:
+    //Function to return list containing elements of right view of binary tree.
+    vector<int> rightView(Node *root)
+    {
+       // Your Code here
+       vector<int>ans;
+       queue<Node*>q;
+       q.push(root);
+       while(!q.empty())
+       {
+           ans.push_back(q.front()->data);
+           int size=q.size();
+           for(int i=0;i<size;i++)
+           {
+               Node* node=q.front();
+               q.pop();
+               if(node->right)
+               q.push(node->right);
+               if(node->left)
+               q.push(node->left);
+           }
+       }
+       return ans;
+    }
+};
+
+Method2: DFS
+
+class Solution
+{
+    public:
+    //Function to return list containing elements of right view of binary tree.
+    void dfs(Node* root,vector<int>&ans,int lvl)
+    {
+        if(!root)
+        return ;
+        if(lvl>ans.size())
+        ans.push_back(root->data);
+        dfs(root->right,ans,lvl+1);
+        dfs(root->left,ans,lvl+1);
+    }
+    vector<int> rightView(Node *root)
+    {
+       // Your Code here
+       vector<int>ans;
+       dfs(root,ans,1);
+       return ans;
+    }
+};
