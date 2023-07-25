@@ -1,0 +1,56 @@
+Problem GFG (Medium)
+Kth Ancestor in a Tree
+
+Question link: https://practice.geeksforgeeks.org/problems/kth-ancestor-in-a-tree/1
+
+Code: In C++:
+Complexity: 
+
+DFS
+T.C=O(n) 
+S.C=O(n) recursive queue.
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+Node* rec(Node* root,int &k,int node)
+{
+    if(!root)
+    return NULL;
+    if(root->data==node)
+    {
+        return root;
+    }
+    Node* l=rec(root->left,k,node);
+    Node* r=rec(root->right,k,node);
+    if(l && !r)
+    {
+        k--;
+        if(k<=0)
+        {
+            k=INT_MAX;
+            return root;
+        }
+        return l;
+    }
+    if(!l && r)
+    {
+        k--;
+        if(k<=0)
+        {
+            k=INT_MAX;
+            return root;
+        }
+        return r;
+    }
+    return NULL;
+}
+int kthAncestor(Node *root, int k, int node)
+{
+    // Code here
+    Node* ans= rec(root,k,node);
+    if(!ans || ans->data==node)
+    return -1;
+    return ans->data;
+}
