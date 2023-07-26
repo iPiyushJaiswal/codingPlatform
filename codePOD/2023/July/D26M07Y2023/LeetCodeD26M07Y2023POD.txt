@@ -1,0 +1,52 @@
+Problem Type: (Medium)
+
+1870. Minimum Speed to Arrive on Time
+
+
+Link: https://leetcode.com/problems/minimum-speed-to-arrive-on-time/description/
+
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+-------------------------------------
+
+#Complexity
+
+Binary Search
+Time complexity:
+T.C= O(n*log(1e7+9))
+
+Space complexity:
+S.C= O(1) .
+
+--------------------------------------
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+    int minSpeedOnTime(vector<int>& dist, double hour) {
+        int low=0;
+        int high=10000009;
+        int ans=10000009;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            double totalT=0;
+            for(auto it:dist)
+            {
+                totalT=ceil(totalT);
+                totalT+=(double)(it)/(double)(mid);
+            }
+            if(hour>=totalT)
+            {
+                ans=mid;
+                high=mid-1;
+            }
+            else
+            low=mid+1;
+        }
+        return (ans>10000000)?-1:ans;
+    }
+};
