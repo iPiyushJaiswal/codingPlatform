@@ -1,0 +1,52 @@
+Problem Type: (Hard)
+
+2141. Maximum Running Time of N Computers
+
+
+Link: https://leetcode.com/problems/maximum-running-time-of-n-computers/
+
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+-------------------------------------
+
+#Complexity
+
+Binary Search
+Time complexity:
+T.C= O(n*logn))
+
+Space complexity:
+S.C= O(1) .
+
+--------------------------------------
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+    long long maxRunTime(int n, vector<int>& batteries) {
+       long long high=0;
+       for(auto it:batteries)
+       high+=it;
+       long long low=0;
+       long long mid;
+       long long ans=0;
+       while(low<=high)
+       {
+           mid=low+(high-low)/2;
+           long long sum=0;
+           for(auto it:batteries)
+           sum+=min((long long)it,mid);
+           if(sum>=mid*n)
+           {
+               ans=mid;
+               low=mid+1;
+           }
+           else
+           high=mid-1;
+       }
+       return ans;
+    }
+};
