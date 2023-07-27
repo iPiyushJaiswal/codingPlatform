@@ -1,0 +1,65 @@
+Problem GFG (Easy)
+Lowest Common Ancestor in a BST
+
+
+Question link: https://practice.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-bst/1
+
+Code: In C++:
+Complexity: 
+
+Method1: Recursive
+T.C=O(height) 
+S.C=O(height) recursive stack.
+
+Method2: Iterative
+T.C=O(height) 
+S.C=O(1)
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+Method1: Recursive
+class Solution{
+    public:
+    Node* rec(Node* root,int n1,int n2)
+    {
+            if(!root)
+            return root;
+            if((root->data>n1 && root->data<n2)||
+            (root->data<n1 && root->data>n2) ||
+            (root->data==n1 || root->data==n2))
+            return root;
+            else if(root->data<n1 && root->data<n2)
+            return rec(root->right,n1,n2);
+            return rec(root->left,n1,n2);
+    }
+        Node* LCA(Node *root, int n1, int n2)
+        {
+            // code here
+            return rec(root,n1,n2);
+        }
+};
+
+Method2: Iterative
+class Solution{
+    public:
+        Node* LCA(Node *root, int n1, int n2)
+        {
+            // code here
+            if(!root)
+            return root;
+            while(root)
+            {
+                if(root->data==n1 || root->data==n2 || 
+                (root->data<n1 && root->data>n2)||
+                (root->data>n1 && root->data<n2))
+                return root;
+                else if(root->data<n1 && root->data<n2)
+                root=root->right;
+                else
+                root=root->left;
+            }
+            return root;
+        }
+}; 
