@@ -1,0 +1,39 @@
+Problem GFG (Easy)
+
+Inorder Successor in BST
+
+
+Question link: https://practice.geeksforgeeks.org/problems/inorder-successor-in-bst/1
+
+Code: In C++:
+Complexity: 
+
+T.C=O(height) 
+S.C=O(1)
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+class Solution{
+  public:
+    // returns the inorder successor of the Node x in BST (rooted at 'root')
+    Node * inOrderSuccessor(Node *root, Node *x)
+    {
+        //Your code here
+        Node* ans=NULL;
+        while(root)
+        {
+            if(root->data>x->data)
+            {
+                ans=root;
+                root=root->left;
+            }
+            else
+            {
+                root=root->right;
+            }
+        }
+        return ans;
+    }
+};
