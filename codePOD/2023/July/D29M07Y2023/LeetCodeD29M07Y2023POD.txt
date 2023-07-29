@@ -3,7 +3,7 @@ Problem Type: (Medium)
 808. Soup Servings
 
 
-Link: https://leetcode.com/problems/predict-the-winner/description/
+Link: https://leetcode.com/problems/soup-servings/description/
 
 
 ---------------------------------------------------------------------------------------------------
