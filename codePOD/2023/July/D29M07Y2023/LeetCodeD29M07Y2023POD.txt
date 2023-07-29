@@ -1,0 +1,114 @@
+Problem Type: (Medium)
+
+808. Soup Servings
+
+
+Link: https://leetcode.com/problems/predict-the-winner/description/
+
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+-------------------------------------
+
+# Approach
+<!-- Describe your approach to solving the problem. -->
+Simple recursion. on 4 test case.
+n>4800 all the probabilities value come near to 1.
+Space optimize use map so that only thoe vaqlue store which will be incounterd in recursive call.
+In DP n*n matrix lot of cell is unused.
+
+# Complexity
+- Time complexity:
+
+Method1:Recursion 
+T.C= 4^n
+
+Method2:DP Memoization 
+T.C= n*n
+
+Method3:Space optimize 
+T.C= n* n *logn
+
+- Space complexity:
+
+Method1:Recursion 
+S.C= O(n) recursive stack
+
+Method2:DP Memoization 
+S.C= O(n*n) + O(n) recursive stack
+
+Method3:Space optimize 
+S.C= worst case O(n*n) + O(n) recursive stack.
+But amortized it take less space than O(n*n).
+
+
+--------------------------------------
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+double rec(int a,int b)
+{
+    if(a<=0 && b<=0)
+    return 0.5;
+    else if(a<=0)
+    return 1;
+    else if(b<=0)
+    return 0;
+    double x=0;
+    x+=rec(a-100,b);
+    x+=rec(a-75,b-25);
+    x+=rec(a-50,b-50);
+    x+=rec(a-25,b-75);
+    return x/4.0;
+}
+double rec1(int a,int b,vector<vector<double>>&dp)
+{
+    if(a<=0 && b<=0)
+    return 0.5;
+    else if(a<=0)
+    return 1;
+    else if(b<=0)
+    return 0;
+    if(dp[a][b]!=-1)
+    return dp[a][b];
+    double x=0;
+    x+=rec1(a-100,b,dp);
+    x+=rec1(a-75,b-25,dp);
+    x+=rec1(a-50,b-50,dp);
+    x+=rec1(a-25,b-75,dp);
+    return dp[a][b]=x/4.0;
+}
+double rec2(int a,int b,map<pair<int,int>,double>&mp)
+{
+    if(a<=0 && b<=0)
+    return 0.5;
+    else if(a<=0)
+    return 1;
+    else if(b<=0)
+    return 0;
+    if(mp.find({a,b})!=mp.end())
+    return mp[{a,b}];
+    double x=0;
+    x+=rec2(a-100,b,mp);
+    x+=rec2(a-75,b-25,mp);
+    x+=rec2(a-50,b-50,mp);
+    x+=rec2(a-25,b-75,mp);
+    return mp[{a,b}]=x/4.0;
+}
+    double soupServings(int n) {
+        if(n>4800)
+        return 1;
+        // return rec(n,n);
+
+        // dp memoization
+        // vector<vector<double>>dp(n+1,vector<double>(n+1,-1));
+        // return rec1(n,n,dp);
+
+        // more optimize use unorderd_map.
+        map<pair<int,int>,double>mp;
+        return rec2(n,n,mp);
+    }
+};
