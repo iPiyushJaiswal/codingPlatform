@@ -1,0 +1,99 @@
+Problem Type: (Medium)
+
+712. Minimum ASCII Delete Sum for Two Strings
+
+
+Link: https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/
+
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+-------------------------------------
+
+# Approach
+
+Pass string by address
+
+--------------
+
+# Complexity
+- Time complexity:
+
+Method 1: rec
+Recursion 
+T.C=exponential
+
+Method 2: rec1
+DP Memoization 
+T.C=O(n*m).
+
+-------------
+
+- Space complexity:
+
+Method 1: rec
+Recursion 
+S.C=max(n,m)recursive stack size n=s1.size(), m=s2.size()
+
+Method 2: rec1
+DP Memoization 
+S.C=O(n*m)dp vector + max(n,m) recursive stack size =>O(n * m)
+
+
+--------------------------------------
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+int rec(int i,int j,string s1,string s2)
+{
+    int cost=0;
+    if(i==s1.size() && j==s2.size())
+    return 0;
+    else if(i==s1.size())
+    cost+=rec(i,j+1,s1,s2) + s2[j];
+    else if(j==s2.size())
+    cost+=rec(i+1,j,s1,s2) + s1[i];
+    else if(s1[i]==s2[j])
+    cost+=rec(i+1,j+1,s1,s2);
+    else
+    {
+        int l=rec(i+1,j,s1,s2) + s1[i];
+        int r=rec(i,j+1,s1,s2) + s2[j];
+        cost+=min(l,r);
+    }
+    return cost;
+}
+long long rec1(int i,int j,string &s1,string &s2,vector<vector<long long>>&dp)
+{
+    if(dp[i][j]!=-1)
+    return dp[i][j];
+    long long cost=0;
+    if(i==s1.size() && j==s2.size())
+    return 0;
+    else if(i==s1.size())
+    cost+=rec1(i,j+1,s1,s2,dp) + s2[j];
+    else if(j==s2.size())
+    cost+=rec1(i+1,j,s1,s2,dp) + s1[i];
+    else if(s1[i]==s2[j])
+    cost+=rec1(i+1,j+1,s1,s2,dp);
+    else
+    {
+        long long l=rec1(i+1,j,s1,s2,dp) + s1[i];
+        long long r=rec1(i,j+1,s1,s2,dp) + s2[j];
+        cost+=min(l,r);
+    }
+    return dp[i][j]=cost;
+}
+    int minimumDeleteSum(string s1, string s2) {
+        // return rec(0,0,s1,s2);
+
+        // memoization dp
+        int n=s1.size();
+        int m=s2.size();
+        vector<vector<long long>>dp(n+1,vector<long long>(m+1,-1));
+        return rec1(0,0,s1,s2,dp);
+    }
+};
