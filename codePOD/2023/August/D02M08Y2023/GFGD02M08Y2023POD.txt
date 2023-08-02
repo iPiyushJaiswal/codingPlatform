@@ -1,4 +1,4 @@
-Problem GFG (Easy)
+Problem GFG (Medium)
 
 Shortest Source to Destination Path
 
