@@ -1,0 +1,95 @@
+Problem Type: (Medium)
+
+46. Permutations
+
+
+Link: https://leetcode.com/problems/permutations/description/
+
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+-------------------------------------
+
+# Approach
+
+Brute force -> Optimized both approach uses recursion + backtracking.
+
+In Brute force we are using extra space for unordered_map, temp vector.
+
+In Optimized Approach we will optimize using the swap in the input vector.
+
+---------------------------------------
+
+# Complexity
+
+- Time complexity:
+
+Brute force -> T.C=O(n!)*n (n!) for all per. n=for loop.
+
+Optimized -> T.C=O(n!)*n (n!) for all per. n=for loop.
+
+---------------------------------------
+
+- Space complexity:
+
+Brute force -> S.C=O(2n) + O(n) recursive space.
+
+Optimized -> O(n) recursive space.
+
+--------------------------------------
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+// T.C=O(n!)*n (n!) for all per. n=for loop.
+// S.C=O(2n)
+    void rec(vector<int>& nums,int n,vector<int>&temp,
+    unordered_map<int,int>&mp,vector<vector<int>>&ans)
+    {
+        if(temp.size()==n)
+        {
+            ans.push_back(temp);
+            return ;
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(mp[nums[i]]==0)
+            {
+                mp[nums[i]]++;
+                temp.push_back(nums[i]);
+                rec(nums,n,temp,mp,ans);
+                temp.pop_back();
+                mp[nums[i]]--;
+            }
+        }
+    }
+    // T.C=O(n!)*n (n!) for all per. n=for loop.
+// S.C=O(n) recursive space.
+    void rec1(vector<int>&nums,int i,int n,vector<vector<int>>&ans)
+    {
+        if(i==n)
+        {
+            ans.push_back(nums);
+            return;
+        }
+        for(int ind=i;ind<n;ind++)
+        {
+            swap(nums[ind],nums[i]);
+            rec1(nums,i+1,n,ans);
+            swap(nums[ind],nums[i]);
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        int n=nums.size();
+        vector<vector<int>>ans;
+        // unordered_map<int,int>mp;
+        // vector<int>temp;
+        // for(int i=0;i<n;i++)
+        // mp[nums[i]]=0;
+        // rec(nums,n,temp,mp,ans);
+        rec1(nums,0,n,ans);
+        return ans;
+    }
+};
