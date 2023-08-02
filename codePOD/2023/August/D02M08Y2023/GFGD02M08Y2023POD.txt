@@ -1,0 +1,58 @@
+Problem GFG (Easy)
+
+Shortest Source to Destination Path
+
+
+Question link: https://practice.geeksforgeeks.org/problems/shortest-source-to-destination-path3544/1
+
+Code: In C++:
+Complexity: 
+
+T.C=O(4*n*m) in worsst case all 1.
+S.C=O(n*m) visited vector + queue Approx O(n*m).
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution {
+  public:
+    int shortestDistance(int N, int M, vector<vector<int>> A, int X, int Y) {
+        // code here
+        if(A[0][0]==0 || A[X][Y]==0)
+        return -1;
+        int rN[]={-1,0,1,0};
+        int cN[]={0,1,0,-1};
+        queue<pair<int,int>>q;
+        q.push({0,0});
+        int lvl=-1;
+        vector<vector<int>>vis(N,vector<int>(M,-1));
+        vis[0][0]=1;
+        while(!q.empty())
+        {
+            int size=q.size();
+            lvl++;
+            for(int i=0;i<size;i++)
+            {
+                int r=q.front().first;
+                int c=q.front().second;
+                q.pop();
+                if(r==X && c==Y)
+                return lvl;
+                for(int j=0;j<4;j++)
+                {
+                    int rV=r+ rN[j];
+                    int cV=c+ cN[j];
+                    if(rV>=0 && rV<N && cV>=0 && cV<M && 
+                    A[rV][cV]==1 && vis[rV][cV]==-1)
+                    {
+                        vis[rV][cV]=1;
+                        q.push({rV,cV});
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+};
