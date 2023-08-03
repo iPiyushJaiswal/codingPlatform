@@ -1,0 +1,63 @@
+Problem Type: (Medium)
+
+17. Letter Combinations of a Phone Number
+
+
+Link: https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+-------------------------------------
+
+# Approach
+
+C++ Recursion + backtracking
+
+---------------------------------------
+
+# Complexity
+
+- Time complexity:
+
+T.C=O(n*4^n) In worst case for digit having 4 character.have choice of 4.
+n digit we have to select.
+
+
+-Space complexity:
+
+S.C=O(n). at most the temp can store is upto n.**
+
+--------------------------------------
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+void rec(int i,int n,vector<string>comb,string digits,vector<string>&ans,
+string temp)
+{
+    if(i==n)
+    {
+        ans.push_back(temp);
+        return;
+    }
+    int dig=digits[i]-'0';
+    for(auto it:comb[dig])
+    {
+        temp.push_back(it);
+        rec(i+1,n,comb,digits,ans,temp);
+        temp.pop_back();
+    }
+}
+    vector<string> letterCombinations(string digits) {
+        vector<string>ans;
+        int n=digits.size();
+        if(n==0)
+        return {};
+        vector<string>comb={"","","abc","def","ghi","jkl","mno","pqrs",
+        "tuv","wxyz"};
+        rec(0,n,comb,digits,ans,"");
+        return ans;
+    }
+};
