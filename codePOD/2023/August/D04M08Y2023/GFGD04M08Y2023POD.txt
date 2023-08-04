@@ -1,0 +1,66 @@
+Problem GFG (Medium)
+
+Reverse a Stack
+
+
+Question link: https://practice.geeksforgeeks.org/problems/reverse-a-stack/1
+
+Code: In C++:
+Complexity: 
+Method 1: Queue
+T.C=O(n)
+S.C=O(n) queue.
+
+Method 2: Recursion
+T.C=O(n)
+S.C=O(2n)  2 recursive stack.
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+Method 1:
+
+class Solution{
+public:
+    void Reverse(stack<int> &st){
+        queue<int>q;
+        while(!st.empty())
+        {
+            q.push(st.top());
+            st.pop();
+        }
+        while(!q.empty())
+        {
+            st.push(q.front());
+            q.pop();
+        }
+    }
+};
+
+
+Method 2:
+
+class Solution{
+public:
+    void rec(stack<int>&st,int val)
+    {
+        if(st.empty())
+        {
+            st.push(val);
+            return;
+        }
+        int a=st.top();
+        st.pop();
+        rec(st,val);
+        st.push(a);
+    }
+    void Reverse(stack<int> &st){
+        if(st.empty())
+        return;
+        int val=st.top();
+        st.pop();
+        Reverse(st);
+        rec(st,val);
+    }
+};
