@@ -1,0 +1,33 @@
+Problem GFG (Easy)
+
+Chocolate Distribution Problem
+
+
+Question link: https://practice.geeksforgeeks.org/problems/reverse-a-stack/1
+
+Code: In C++:
+Complexity: 
+
+T.C=O(nlogn) for sort + O(n) for loop
+S.C=O(1) no extra space used.
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution{
+    public:
+    long long findMinDiff(vector<long long> a, long long n, long long m){
+    //code
+    sort(a.begin(),a.end());
+    long long ans=LONG_MAX;
+    for(long long i=0;i<n;i++)
+    {
+        if(i+m-1>=n)
+        break;
+        ans=min(ans,a[i+m-1]-a[i]);
+    }
+    return ans;
+    }   
+};
