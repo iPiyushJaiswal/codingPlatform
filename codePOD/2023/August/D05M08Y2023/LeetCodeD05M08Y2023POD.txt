@@ -1,0 +1,75 @@
+Problem Type: (Medium)
+
+95. Unique Binary Search Trees II
+
+
+Link: https://leetcode.com/problems/unique-binary-search-trees-ii/
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+-------------------------------------
+
+# Approach
+
+C++ Recursion + backtracking
+
+---------------------------------------
+
+# Complexity
+
+- Time complexity:
+Method 1: rec 
+
+T.C=Exponential
+
+-Space complexity:
+
+
+S.C= Exponential
+
+
+
+--------------------------------------
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+vector<TreeNode*>rec(int low,int high)
+{
+    if(low>high)
+    {
+        return {NULL};
+    }
+    if(low==high)
+    {
+        TreeNode * temp=new TreeNode();
+        temp->val=low;
+        temp->left=NULL;
+        temp->right=NULL;
+        return {temp};
+    }
+    vector<TreeNode*>ans;
+    for(int i=low;i<=high;i++)
+    {
+        vector<TreeNode*>l=rec(low,i-1);
+        vector<TreeNode*>h=rec(i+1,high);
+        for(int j=0;j<l.size();j++)
+        {
+            for(int k=0;k<h.size();k++)
+            {
+                TreeNode* temp=new TreeNode();
+                temp->val=i;
+                temp->left=l[j];
+                temp->right=h[k];
+                ans.push_back(temp);
+            }
+        }
+    }
+    return ans;
+}
+    vector<TreeNode*> generateTrees(int n) {
+        return rec(1,n);
+    }
+};

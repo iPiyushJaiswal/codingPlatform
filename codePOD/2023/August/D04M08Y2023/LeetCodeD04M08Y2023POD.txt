@@ -1,0 +1,78 @@
+Problem Type: (Medium)
+
+139. Word Break
+
+
+Link: https://leetcode.com/problems/word-break/description/
+
+---------------------------------------------------------------------------------------------------
+
+Solution:
+-------------------------------------
+
+# Approach
+
+C++ Recursion + backtracking
+
+---------------------------------------
+
+# Complexity
+
+- Time complexity:
+Method 1: rec 
+
+T.C=Exponential
+
+Method 2: rec1 DP Memoization
+
+T.C=n^3 
+
+-Space complexity:
+
+Method 1:
+
+S.C=O(n) recusive stack
+
+Method 2:
+
+S.C=(n^2) + O(n) recusive stack 
+
+--------------------------------------
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+    bool rec(string s,set<string>&st)
+    {
+        if(s.size()==0)
+        return true;
+        for(int i=1;i<=s.size();i++)
+        {
+            string x=s.substr(0,i);
+            if(st.find(x)!=st.end() && rec(s.substr(i,s.size()-i),st))
+            return true;
+        }
+        return false;
+    }
+    bool rec1(string s,set<string>&st,unordered_map<string,bool>&dp)
+    {
+        if(s.size()==0)
+        return true;
+        if(dp.find(s)!=dp.end())
+        return dp[s];
+        
+        
+        return dp[s]=false;
+    }
+    bool wordBreak(string s, vector<string>& wordDict) {
+        set<string>st;
+        for(auto it:wordDict)
+        st.insert(it);
+        // return rec(s,st);
+
+        // memoize
+        unordered_map<string,bool>dp;
+        return rec1(s,st,dp);
+    }
+};
