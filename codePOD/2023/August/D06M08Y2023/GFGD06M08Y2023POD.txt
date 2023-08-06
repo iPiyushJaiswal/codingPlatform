@@ -1,0 +1,75 @@
+Problem GFG (Easy)
+
+String Permutations
+
+
+Question link: https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string-1587115620/1
+
+Code: In C++:
+Complexity: 
+
+Method 1: Map 
+T.C=O(n*n!) 
+S.C=O(n) + O(n) recursive stack.
+
+Method 2: Swap in same array 
+T.C=O(n*n!) 
+S.C=O(n) recursive stack.
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution{
+    public:
+    //Complete this function
+    void rec(int n,string S,vector<string>&ans,string temp,
+    unordered_map<int,int>&mp)
+    {
+        if(temp.size()==n)
+        {
+            ans.push_back(temp);
+            return;
+        }
+        for(int j=0;j<n;j++)
+        {
+            if(mp[j]==0)
+            {
+                mp[j]++;
+                temp.push_back(S[j]);
+                rec(n,S,ans,temp,mp);
+                temp.pop_back();
+                mp[j]--;
+            }
+        }
+    }
+    void rec1(int i,string &S,vector<string>&ans)
+    {
+        if(i==S.size())
+        {
+            ans.push_back(S);
+            return;
+        }
+        for(int j=i;j<S.size();j++)
+        {
+            swap(S[i],S[j]);
+            rec1(i+1,S,ans);
+            swap(S[i],S[j]);
+        }
+    }
+    vector<string> permutation(string S)
+    {
+        //Your code here
+        vector<string>ans;
+        int n=S.size();
+        string temp;
+        // unordered_map<int,int>mp;
+        // for(int i=0;i<n;i++)
+        // mp[i]=0;
+        // rec(n,S,ans,temp,mp);
+        rec1(0,S,ans);
+        sort(ans.begin(),ans.end());
+        return ans;
+    }
+};
