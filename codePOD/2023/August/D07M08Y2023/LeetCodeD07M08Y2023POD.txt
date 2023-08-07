@@ -1,0 +1,50 @@
+Problem Type: (Medium)
+
+74. Search a 2D Matrix
+
+Link: https://leetcode.com/problems/search-a-2d-matrix/description/
+
+---------------------------------------------------------------------------------------------------
+Solution:
+-------------------------------------
+
+# Approach
+
+C++ Recursion + backtracking
+
+---------------------------------------
+
+# Complexity
+
+- Time complexity:
+Method : Binary Search on Matrix 
+
+T.C=O(log(n*m))
+
+-Space complexity:
+
+S.C= O(1)
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+       int n=matrix.size();
+       int m=matrix[0].size();
+       int low=0;
+       int high=n*m -1;
+       while(low<=high)
+       {
+           int mid=low+(high-low)/2;
+           int x=matrix[mid/m][mid%m];
+           if(x==target)
+           return true;
+           else if(x<target)
+           low=mid+1;
+           else
+           high=mid-1;
+       }
+       return false;
+    }
+};
