@@ -1,0 +1,78 @@
+Problem GFG (Hard)
+
+Solve the Sudoku
+
+
+Question link: https://practice.geeksforgeeks.org/problems/solve-the-sudoku-1587115621/1
+
+Code: In C++:
+Complexity: 
+
+Method: Recursion + backtracking 
+
+T.C=O(9^(N*N))
+S.C=O(n*n) recursive stack.
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution 
+{
+    public:
+    //Function to find a solved Sudoku. 
+    bool isSafe(int r,int c,int k,int grid[N][N])
+    {
+        for(int i=0;i<N;i++)
+        {
+            if(grid[i][c]==k)
+            return false;
+            if(grid[r][i]==k)
+            return false;
+            if(grid[3*(r/3) +i/3][3*(c/3) + i%3]==k)
+            return false;
+        }
+        return true;
+    }
+    bool SolveSudoku(int grid[N][N])  
+    { 
+        // Your code here
+        for(int i=0;i<N;i++)
+        {
+            for(int j=0;j<N;j++)
+            {
+                if(grid[i][j]==0)
+                {
+                    for(int k=1;k<=9;k++)
+                    {
+                        if(isSafe(i,j,k,grid))
+                        {
+                            grid[i][j]=k;
+                            if(SolveSudoku(grid))
+                            return true;
+                            else
+                            grid[i][j]=0;
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    //Function to print grids of the Sudoku.
+    void printGrid (int grid[N][N]) 
+    {
+        // Your code here 
+        if(SolveSudoku(grid))
+        {
+            for(int i=0;i<N;i++)
+            {
+                for(int j=0;j<N;j++)
+                cout<<grid[i][j]<<" ";
+            }
+        }
+    }
+};
