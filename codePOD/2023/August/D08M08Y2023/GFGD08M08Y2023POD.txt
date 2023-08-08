@@ -1,0 +1,64 @@
+Problem GFG (Medium)
+
+Fraction pairs with sum 1
+
+
+Question link: https://practice.geeksforgeeks.org/problems/fraction-pairs-with-sum-1/1
+
+Code: In C++:
+Complexity: 
+Method 1: Brute Force
+
+T.C=O(N*N))
+S.C=O(1)
+
+Method 2: Optimized. using unordered_map 
+
+T.C=O(N))
+S.C=O(N) unordered_map size
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+Method 1: Brute Force
+
+class Solution
+{
+    public:
+    int countFractions(int n, int numerator[], int denominator[])
+    {
+        int count=0;
+        for(int i=0;i<n;i++)
+        {
+            double x=(numerator[i]*1.0/denominator[i]);
+            for(int j=i+1;j<n;j++)
+            {
+                double y=((denominator[j]-numerator[j])*1.0)/denominator[j];
+                if(x==y)
+                count++;
+            }
+        }
+        return count;
+    }
+};
+
+Method 2: Unordered_map
+
+class Solution
+{
+    public:
+    int countFractions(int n, int numerator[], int denominator[])
+    {
+        unordered_map<double,int>mp;
+        int count=0;
+        for(int i=0;i<n;i++)
+        {
+            double x=(numerator[i]*1.0/denominator[i]);
+            double y=((denominator[i]-numerator[i])*1.0)/denominator[i];
+            count+=mp[y];
+            mp[x]++;
+        }
+        return count;
+    }
+};
