@@ -10,7 +10,7 @@ Solution:
 
 # Approach
 
-C++ Recursion + backtracking
+C++
 
 ---------------------------------------
 
