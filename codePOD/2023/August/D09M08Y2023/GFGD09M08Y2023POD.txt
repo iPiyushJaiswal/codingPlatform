@@ -1,0 +1,37 @@
+Problem GFG (Medium)
+
+Largest prime factor
+
+
+Question link: https://practice.geeksforgeeks.org/problems/largest-prime-factor2601/1
+
+
+Complexity: 
+
+Method 1: optimized
+
+T.C=O(sqrt(N)
+S.C=O(1)
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+class Solution{
+public: 
+    long long int largestPrimeFactor(int N){
+        // code here
+        int ans=1;
+        int val=N;
+        for(int i=2;i*i<=val;i++)
+        {
+            if(N%i==0){
+                while(N%i==0)
+                    N/=i;
+                ans=max(ans,i);
+            }
+        }
+        return max(ans,N);
+    }
+};
