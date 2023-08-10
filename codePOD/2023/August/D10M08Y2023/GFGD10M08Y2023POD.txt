@@ -1,0 +1,95 @@
+Problem GFG (Medium)
+
+Longest Common Subsequence
+
+
+Question link: https://practice.geeksforgeeks.org/problems/longest-common-subsequence-1587115620/1
+
+
+Complexity: 
+
+Method 1: recurssion
+
+T.C=O(2^n * 2^m)
+S.C=O(x+y)
+-----------------------
+Method 2: Memoization
+
+T.C=O(x*y)
+S.C=O(x*y) + O(x+y) recursive stack
+-----------------------
+Method 3: Tabulation
+
+T.C=O(x*y)
+S.C=O(x*y)
+-----------------------
+Method 4: Space Optimized
+
+T.C=O(x*y)
+S.C=O(2y)
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+class Solution
+{
+    public:
+    //Function to find the length of longest common subsequence in two strings.
+    int rec(int i,int j,string s1,string s2)
+    {
+        if(i<0 || j<0)
+        return 0;
+        if(s1[i]==s2[j])
+        return 1 + rec(i-1,j-1,s1,s2);
+        return max(rec(i-1,j,s1,s2),rec(i,j-1,s1,s2));
+    }
+    int rec1(int i,int j,string s1,string s2,
+    vector<vector<int>>&dp)
+    {
+        if(i<0 || j<0)
+        return 0;
+        if(dp[i][j]!=-1)
+        return dp[i][j];
+        if(s1[i]==s2[j])
+        return dp[i][j]=1 + rec1(i-1,j-1,s1,s2,dp);
+        return dp[i][j]=max(rec1(i-1,j,s1,s2,dp),rec1(i,j-1,s1,s2,dp));
+    }
+    int lcs(int n, int m, string s1, string s2)
+    {
+        // your code here
+        // return rec(n-1,m-1,s1,s2);
+        
+        // memoization
+        // vector<vector<int>>dp(n,vector<int>(m,-1));
+        // return rec1(n-1,m-1,s1,s2,dp);
+        
+        // tabulation
+        // vector<vector<int>>dp(n+1,vector<int>(m+1,0));
+        // for(int i=1;i<=n;i++)
+        // {
+        //     for(int j=1;j<=m;j++)
+        //     {
+        //         if(s1[i-1]==s2[j-1])
+        //         dp[i][j]=1 + dp[i-1][j-1];
+        //         else
+        //         dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+        //     }
+        // }
+        // return dp[n][m];
+        
+        // space optimization
+        vector<int>dp(m+1,0);
+        vector<int>temp(m+1,0);
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=m;j++)
+            {
+                if(s1[i-1]==s2[j-1])
+                temp[j]=1 + dp[j-1];
+                else
+                temp[j]=max(dp[j],temp[j-1]);
+            }
+            dp=temp;
+        }
+        return dp[m];
+    }
