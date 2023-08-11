@@ -1,0 +1,128 @@
+Problem Type: (Medium)
+
+518. Coin Change II
+
+
+Link: https://leetcode.com/problems/coin-change-ii/
+
+---------------------------------------------------------------------------------------------------
+Solution:
+-------------------------------------
+
+# Approach
+
+C++ DP
+---------------------------------------
+
+# Complexity
+
+Method 1: Recursion  
+
+T.C= Exponential
+
+S.C= O(amount)
+
+Method 2: Memoization  
+
+T.C= O(N*amount)
+
+S.C= O(N*amount) DP vector + O(amount) recursive stack
+
+Method 3: Tabulation  
+
+T.C= O(N*amount)
+
+S.C= O(N*amount) DP vector 
+
+Method 4: Space Optimization  
+
+T.C= O(N*amount)
+
+S.C= O(2*amount) DP vector 
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+int rec(int i,int amount,vector<int>& coins)
+{
+    if(i==0)
+    {
+        if(amount%coins[i]==0)
+        return 1;
+        return 0;
+    }
+    int notTake=rec(i-1,amount,coins);
+    int take=0;
+    if(amount>=coins[i])
+    take=rec(i,amount-coins[i],coins);
+    return notTake + take;
+}
+int rec1(int i,int amount,vector<int>& coins,vector<vector<int>>&dp)
+{
+    if(i==0)
+    {
+        if(amount%coins[i]==0)
+        return dp[i][amount]=1;
+        return dp[i][amount]=0;
+    }
+    if(dp[i][amount]!=-1)
+    return dp[i][amount];
+    int notTake=rec1(i-1,amount,coins,dp);
+    int take=0;
+    if(amount>=coins[i])
+    take=rec1(i,amount-coins[i],coins,dp);
+    return dp[i][amount]=notTake + take;
+}
+    int change(int amount, vector<int>& coins) {
+        int n=coins.size();
+        // recursion
+        // return rec(n-1,amount,coins);
+
+        // memoization
+        // vector<vector<int>>dp(n,vector<int>(amount+1,-1));
+        // return rec1(n-1,amount,coins,dp);
+
+        // tabulation
+        // vector<vector<int>>dp(n,vector<int>(amount+1,0));
+        // for(int j=0;j<=amount;j++)
+        // {
+        //     if(j%coins[0]==0)
+        //     dp[0][j]=1;
+        // }
+        // for(int i=1;i<n;i++)
+        // {
+        //     for(int j=0;j<=amount;j++)
+        //     {
+        //         int notTake=dp[i-1][j];
+        //         int take=0;
+        //         if(j>=coins[i])
+        //         take=dp[i][j-coins[i]];
+        //         dp[i][j]=notTake + take;
+        //     }
+        // }
+        // return dp[n-1][amount];
+
+        // space optimization
+        vector<int>dp(amount+1,0);
+        vector<int>temp(amount+1,0);
+        for(int j=0;j<=amount;j++)
+        {
+            if(j%coins[0]==0)
+            dp[j]=1;
+        }
+        for(int i=1;i<n;i++)
+        {
+            for(int j=0;j<=amount;j++)
+            {
+                int notTake=dp[j];
+                int take=0;
+                if(j>=coins[i])
+                take=temp[j-coins[i]];
+                temp[j]=notTake + take;
+            }
+            dp=temp;
+        }
+        return dp[amount];
+    }
+};
