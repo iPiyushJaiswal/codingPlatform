@@ -1,0 +1,123 @@
+Problem Type: (Medium)
+
+63. Unique Paths II
+
+
+Link: https://leetcode.com/problems/unique-paths-ii/
+
+---------------------------------------------------------------------------------------------------
+Solution:
+-------------------------------------
+
+# Approach
+
+C++ DP
+---------------------------------------
+
+# Complexity
+
+Method 1: Recursion  
+
+T.C= Exponential
+
+S.C= O(m+n) recursive stack.
+
+Method 2: Memoization  
+
+T.C= O(m*n)
+
+S.C= O(m*n) DP vector + O(m+n) recursive stack.
+
+Method 3: Tabulation  
+
+T.C= O(m*n)
+
+S.C= O(m*n) DP vector 
+
+Method 4: Space Optimization  
+
+T.C= O(m*n)
+
+S.C= O(2*n) DP vector 
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+int rec(int i,int j,int m,int n,vector<vector<int>>& obstacleGrid)
+{
+    if(i==m && j==n)
+    return 1;
+    int r=0,d=0;
+    if(j+1<=n && obstacleGrid[i][j+1]==0)
+    r=rec(i,j+1,m,n,obstacleGrid);
+    if(i+1<=m && obstacleGrid[i+1][j]==0)
+    d=rec(i+1,j,m,n,obstacleGrid);
+    return r+d;
+}
+int rec1(int i,int j,int m,int n,vector<vector<int>>& obstacleGrid,
+vector<vector<int>>&dp)
+{
+    if(i==m && j==n)
+    return dp[i][j]=1;
+    if(dp[i][j]!=-1)
+    return dp[i][j];
+    int r=0,d=0;
+    if(j+1<=n && obstacleGrid[i][j+1]==0)
+    r=rec1(i,j+1,m,n,obstacleGrid,dp);
+    if(i+1<=m && obstacleGrid[i+1][j]==0)
+    d=rec1(i+1,j,m,n,obstacleGrid,dp);
+    return dp[i][j]=r+d;
+}
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+        int m=obstacleGrid.size();
+        int n=obstacleGrid[0].size();
+        if(obstacleGrid[0][0]!=0 || obstacleGrid[m-1][n-1]!=0)
+        return 0;
+        // return rec(0,0,m-1,n-1,obstacleGrid);
+
+        // memoization
+        // vector<vector<int>>dp(m,vector<int>(n,-1));
+        // return rec1(0,0,m-1,n-1,obstacleGrid,dp);
+
+        // tabulation
+        // vector<vector<long long>>dp(m+1,vector<long long>(n+1,0));
+        // dp[m-1][n-1]=1;
+        // for(int i=m-1;i>=0;i--)
+        // {
+        //     for(int j=n-1;j>=0;j--)
+        //     {
+        //         if(i==m-1 && j==n-1)
+        //         continue;
+        //         long long r=0,d=0;
+        //         if(j+1<n && obstacleGrid[i][j+1]==0)
+        //         r=dp[i][j+1];
+        //         if(i+1<m && obstacleGrid[i+1][j]==0)
+        //         d=dp[i+1][j];
+        //         dp[i][j]=r+d;
+        //     }
+        // }
+        // return dp[0][0];
+
+        // spce optimization
+        vector<long long>dp(n+1,0);
+        vector<long long>temp(n+1,0);
+        temp[n-1]=dp[n-1]=1;
+        for(int i=m-1;i>=0;i--)
+        {
+            for(int j=n-1;j>=0;j--)
+            {
+                if(i==m-1 && j==n-1)
+                continue;
+                long long r=0,d=0;
+                if(j+1<n && obstacleGrid[i][j+1]==0)
+                r=temp[j+1];
+                if(i+1<m && obstacleGrid[i+1][j]==0)
+                d=dp[j];
+                temp[j]=r+d;
+            }
+            dp=temp;
+        }
+        return dp[0];
+    }
+};
