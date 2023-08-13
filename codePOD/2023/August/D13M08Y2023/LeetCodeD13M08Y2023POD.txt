@@ -1,0 +1,150 @@
+Problem Type: (Medium)
+
+2369. Check if There is a Valid Partition For The Array
+
+
+Link: https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/description/
+
+---------------------------------------------------------------------------------------------------
+Solution:
+-------------------------------------
+
+# Approach
+
+C++ DP
+---------------------------------------
+
+# Complexity
+
+Method 1: Recursion  
+
+T.C= Exponential
+
+S.C= O(n) recursive stack.
+
+Method 2: Memoization  
+
+T.C= O(n)
+
+S.C= O(n) DP vector + O(n) recursive stack.
+
+Method 3: Tabulation  
+
+T.C= O(n)
+
+S.C= O(n) DP vector
+
+Method 4: Space Optimization  
+
+T.C= O(n)
+
+S.C= O(1) 
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+bool rec(vector<int>& nums,int i)
+{
+    if(i<0)
+        return true;
+    if(i-1>=0 && nums[i]==nums[i-1])
+    {
+        if(rec(nums,i-2))
+        return true;
+        if(i-2>=0 && nums[i]==nums[i-2])
+        {
+            if(rec(nums,i-3))
+            return true;
+        }
+    }
+    if(i-1>=0 && nums[i]==nums[i-1] + 1 &&  i-2>=0 && nums[i]==nums[i-2]+2)
+    {
+        if(rec(nums,i-3))
+        return true;
+    }
+    return false;
+}
+bool rec1(vector<int>& nums,int i,map<int,int>&mp)
+{
+    if(i<0)
+        return true;
+    if(mp.find(i)!=mp.end())
+    return mp[i];
+    if(i-1>=0 && nums[i]==nums[i-1])
+    {
+        if(rec1(nums,i-2,mp))
+        return mp[i]=true;
+        if(i-2>=0 && nums[i]==nums[i-2])
+        {
+            if(rec1(nums,i-3,mp))
+            return mp[i]=true;
+        }
+    }
+    if(i-1>=0 && nums[i]==nums[i-1] + 1 &&  i-2>=0 && nums[i]==nums[i-2]+2)
+    {
+        if(rec1(nums,i-3,mp))
+        return mp[i]=true;
+    }
+    return mp[i]=false;
+}
+    bool validPartition(vector<int>& nums) {
+        int n=nums.size();
+        // return rec(nums,n-1);
+
+        // memoization
+        // map<int,int>mp;
+        // return rec1(nums,n-1,mp);
+        
+        // tabulation
+        // vector<int>dp(n+1,0);
+        // dp[0]=1;
+        // for(int i=2;i<=n;i++)
+        // {
+        //     if(i-2>=0 && nums[i-1]==nums[i-2])
+        //     {
+        //         if(dp[i-2])
+        //         dp[i]=1;
+        //         if(i-3>=0 && nums[i-1]==nums[i-3])
+        //         {
+        //             if(dp[i-3])
+        //             dp[i]=1;
+        //         }
+        //     }
+        //     if(i-2>=0 && nums[i-1]==nums[i-2] + 1 &&
+        //       i-3>=0 && nums[i-1]==nums[i-3] + 2)
+        //     {
+        //         if(dp[i-3])
+        //         dp[i]=1;
+        //     }
+        // }
+        // return dp[n];
+
+        // space optimization
+        int dp1=0,dp2=1,dp3=1;
+        for(int i=2;i<=n;i++)
+        {
+            int curr=0;
+            if(i-2>=0 && nums[i-1]==nums[i-2])
+            {
+                if(dp2==1)
+                curr=1;
+                if(i-3>=0 && nums[i-1]==nums[i-3])
+                {
+                    if(dp3==1)
+                    curr=1;
+                }
+            }
+            if(i-2>=0 && nums[i-1]==nums[i-2] + 1 &&
+              i-3>=0 && nums[i-1]==nums[i-3] + 2)
+            {
+                if(dp3==1)
+                curr=1;
+            }
+            dp3=dp2;
+            dp2=dp1;
+            dp1=curr;
+        }
+        return dp1;
+    }
+};
