@@ -1,0 +1,43 @@
+Problem GFG (Medium)
+
+Non Repeating Numbers
+
+
+Question link: https://practice.geeksforgeeks.org/problems/finding-the-numbers0215/1
+
+
+Complexity: 
+
+Method1: Bit Manipulation
+
+Time Complexity=O(n)
+
+Space Complexity=O(1).  
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution
+{
+public:
+    vector<int> singleNumber(vector<int> nums) 
+    {
+        // Code here.
+        int x=0;
+        for(auto it:nums)
+        x^=it;
+        int buck=x&(~(x-1));
+        int buck1=0,buck2=0;
+        for(auto it:nums)
+        {
+            if(it&buck)
+            buck1^=it;
+            else
+            buck2^=it;
+        }
+        return {min(buck1,buck2),max(buck1,buck2)};
+    }
+};
