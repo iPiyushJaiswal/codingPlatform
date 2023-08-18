@@ -1,0 +1,75 @@
+Problem Type: (Medium)
+
+542. 01 Matrix
+
+
+Link: https://leetcode.com/problems/01-matrix/
+
+---------------------------------------------------------------------------------------------------
+Solution:
+-------------------------------------
+
+# Approach
+
+C++ BFS
+---------------------------------------
+
+# Complexity
+
+Method 1: 
+
+T.C= O(m*n) 
+
+S.C= O(m*n) visited array + queue.
+
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+        int m=mat.size();
+        int n=mat[0].size();
+        vector<vector<int>>ans(m,vector<int>(n,0));
+        vector<vector<int>>vis(m,vector<int>(n,-1));
+        queue<pair<int,int>>q;
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(mat[i][j]==0)
+                {
+                    q.push({i,j});
+                    vis[i][j]=1;
+                }
+            }
+        }
+        int rN[]={-1,0,1,0};
+        int cN[]={0,1,0,-1};
+        int lvl=0;
+        while(!q.empty())
+        {
+            int size=q.size();
+            while(size>0){
+            int r=q.front().first;
+            int c=q.front().second;
+            q.pop();
+            size--;
+            for(int i=0;i<4;i++)
+            {
+                int rV=r+rN[i];
+                int cV=c+cN[i];
+                if(rV>=0 && rV<m && cV>=0 && cV<n && vis[rV][cV]==-1 &&
+                mat[rV][cV]==1)
+                {
+                    vis[rV][cV]=1;
+                    q.push({rV,cV});
+                    ans[rV][cV]=lvl+1;
+                }
+            }
+            }
+            lvl++;
+        }
+        return ans;
+    }
+};
