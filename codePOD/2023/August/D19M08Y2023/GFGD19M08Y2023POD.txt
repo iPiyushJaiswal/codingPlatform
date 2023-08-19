@@ -20,7 +20,7 @@ CODE IN C++
 ---------------- 
 ------------------------------------------------------------------------------------------------
 
-lass Solution
+class Solution
 {
     public:
     //Function to find a continuous sub-array which adds up to a given number.
