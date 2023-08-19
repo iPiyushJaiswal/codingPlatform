@@ -1,0 +1,57 @@
+Problem GFG (Medium)
+
+Number of occurrence
+
+
+Question link: https://practice.geeksforgeeks.org/problems/number-of-occurrence2259/1
+
+
+Complexity: 
+
+Method1: Binary Search
+
+Time Complexity=O(logn)
+
+Space Complexity=O(1).  
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution{
+public:	
+	/* if x is present in arr[] then returns the count
+		of occurrences of x, otherwise returns 0. */
+	int count(int arr[], int n, int x) {
+	    // code here
+	    int low=0;
+	    int high=n-1;
+	    while(low<=high)
+	    {
+	        int mid=low+(high-low)/2;
+	        if(arr[mid]>=x)
+	        {
+	            high=mid-1;
+	        }
+	        else
+	        low=mid+1;
+	    }
+	    int stInd=low;
+	    low=0;
+	    high=n-1;
+	    while(low<=high)
+	    {
+	        int mid=low+(high-low)/2;
+	        if(arr[mid]<=x)
+	        {
+	            low=mid+1;
+	        }
+	        else
+	        high=mid-1;
+	    }
+	   // cout<<high<<stInd;
+	    return high-stInd+1;
+	}
+};
