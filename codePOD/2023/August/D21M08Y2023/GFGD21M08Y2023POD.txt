@@ -1,0 +1,53 @@
+Problem GFG (Easy)
+
+Surround the 1's
+
+
+Question link: https://practice.geeksforgeeks.org/problems/surround-the-1s2505/1
+
+
+Complexity: 
+
+Method1: Traversal
+
+Time Complexity=O(n*m*8)
+
+Space Complexity=O(16).  
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution {
+public:
+    int Count(vector<vector<int> >& matrix) {
+        // Code here
+        int ans=0;
+        int n=matrix.size();
+        int m=matrix[0].size();
+        int rN[]={-1,-1,-1,0,1,1,1,0};
+        int cN[]={-1,0,1,1,1,0,-1,-1};
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(matrix[i][j]==1)
+                {
+                    int countZero=0;
+                    for(int k=0;k<8;k++)
+                    {
+                        int rV=i+rN[k];
+                        int cV=j+cN[k];
+            if(rV>=0 && rV<n && cV>=0 && cV<m && matrix[rV][cV]==0)
+            countZero++;
+                    }
+                    if(countZero!=0 && countZero%2==0)
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+};
