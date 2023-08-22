@@ -1,0 +1,46 @@
+Problem GFG (Medium)
+
+Make Matrix Beautiful
+
+
+Question link: https://practice.geeksforgeeks.org/problems/make-matrix-beautiful-1587115620/1
+
+
+Complexity: 
+
+Method1: Traversal
+
+Time Complexity=O(n*n)
+
+Space Complexity=O(1).  
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution
+{
+    public:
+    int findMinOpeartion(vector<vector<int> > matrix, int n)
+    {
+        int sum=0;
+        int maxi=0;
+        for(int i=0;i<n;i++)
+        {
+            int rS=0;
+            int cS=0;
+            for(int j=0;j<n;j++)
+            {
+                rS+=matrix[i][j];
+                cS+=matrix[j][i];
+                sum+=matrix[i][j];
+            }
+            maxi=max(maxi,rS);
+            maxi=max(maxi,cS);
+        }
+        int ans=maxi*n-sum;
+        return ans;
+    } 
+};
