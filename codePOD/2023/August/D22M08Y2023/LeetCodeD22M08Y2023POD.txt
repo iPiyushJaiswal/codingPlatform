@@ -1,0 +1,43 @@
+Problem Type: (Easy)
+
+168. Excel Sheet Column Title
+
+
+Link: https://leetcode.com/problems/excel-sheet-column-title/description/
+
+---------------------------------------------------------------------------------------------------
+Solution:
+-------------------------------------
+
+# Approach
+
+C++  Maths
+---------------------------------------
+
+# Complexity
+
+Method 1: 
+
+T.C= O(n) 
+
+S.C= O(1) ;
+
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+    string convertToTitle(int columnNumber) {
+        string ans;
+        columnNumber--;
+        int val;
+        while(columnNumber>=0)
+        {
+            val=columnNumber%26;
+            ans.push_back('A'+val);
+            columnNumber=columnNumber/26-1;
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
