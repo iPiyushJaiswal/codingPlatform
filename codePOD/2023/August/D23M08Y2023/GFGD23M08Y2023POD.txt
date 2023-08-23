@@ -1,0 +1,68 @@
+Problem GFG (Medium)
+
+Find the string in grid
+
+
+Question link: https://practice.geeksforgeeks.org/problems/find-the-string-in-grid0111/1
+
+
+Complexity: 
+
+Method1: DFS
+
+Time Complexity=O(n*m*k*8)
+
+Space Complexity=O(k). recursive stack.
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution {
+public:
+bool dfs(int i,int j,int n,int m,int rD,int cD,
+vector<vector<char>>grid,int k,string word,int wS)
+{
+    if(k==wS)
+    return true;
+    int r=i+rD;
+    int c=j+cD;
+    if(r>=0 && r<n && c>=0 && c<m && grid[r][c]==word[k])
+    {
+        if(dfs(r,c,n,m,rD,cD,grid,k+1,word,wS))
+        return true;
+    }
+    return false;
+}
+	vector<vector<int>>searchWord(vector<vector<char>>grid, string word){
+	    // Code here
+	    int n=grid.size();
+	    int m=grid[0].size();
+	    int wS=word.size();
+	    int rN[]={-1,-1,-1,0,1,1,1,0};
+	    int cN[]={-1,0,1,1,1,0,-1,-1};
+	    vector<vector<int>>ans;
+	    for(int i=0;i<n;i++)
+	    {
+	        for(int j=0;j<m;j++)
+	        {
+	            int k=0;
+	            if(grid[i][j]==word[k])
+	            {
+	                for(int l=0;l<8;l++)
+	                {
+	                    if(dfs(i,j,n,m,rN[l],cN[l],grid,k+1,word,wS))
+	                    {
+	                        ans.push_back({i,j});
+	                        break;
+	                    }
+	                }
+	            }
+	        }
+	    }
+	    sort(ans.begin(),ans.end());
+	    return ans;
+	}
+};
