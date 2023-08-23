@@ -1,0 +1,69 @@
+Problem Type: (Medium)
+
+767. Reorganize String
+
+
+Link: https://leetcode.com/problems/reorganize-string/description/
+
+---------------------------------------------------------------------------------------------------
+Solution:
+-------------------------------------
+
+# Approach
+
+C++  Frequency vector(map)
+---------------------------------------
+
+# Complexity
+
+Method 1: 
+
+T.C= O(n) 
+
+S.C= O(26) ;
+
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+    string reorganizeString(string s) {
+        int n=s.size();
+        unordered_map<char,int>mp;
+        for(int i=0;i<n;i++)
+        mp[s[i]]++;
+        int maxi=0;
+        char ch;
+        for(auto it:mp)
+        {
+            if(maxi<it.second)
+            {
+                maxi=it.second;
+                ch=it.first;
+            }            
+        }
+        mp.erase(ch);
+        if(n-maxi+1<maxi)
+        return "";
+        int i=0;
+
+        while(i<n && maxi>0)
+        {
+            s[i]=ch;
+            i+=2;
+            maxi--;
+        }
+        for(auto it:mp)
+        {
+            while(it.second>0)
+            {
+                if(i>=n)
+                i=1;
+                s[i]=it.first;
+                i+=2;
+                it.second--;
+            }
+        }
+        return s;
+    }
+};
