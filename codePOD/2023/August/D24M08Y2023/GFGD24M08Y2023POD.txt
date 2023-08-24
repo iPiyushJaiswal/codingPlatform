@@ -1,0 +1,119 @@
+Problem GFG (Medium)
+
+Multiply two strings
+
+
+Question link: https://practice.geeksforgeeks.org/problems/multiply-two-strings/1
+
+
+Complexity: 
+
+Method1: Normal Multiplication
+
+Time Complexity=O(n1*n2)
+
+Space Complexity=O(n1+n2).
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution{
+  public:
+    /*You are required to complete below function */
+    string multiplyStrings(string s1, string s2) {
+       //Your code here
+       string ans;
+       int flag=0;
+       if(s1[0]=='-')
+       {
+           s1=s1.substr(1,s1.size()-1);
+           flag=1;
+       }
+       if(s2[0]=='-')
+       {
+           s2=s2.substr(1,s2.size()-1);
+           if(flag==1)
+           flag=0;
+           else
+           flag=1;
+       }
+       int n1=s1.size();
+       int n2=s2.size();
+       int counter=-1;
+       for(int i=n2-1;i>=0;i--)
+       {
+           string temp;
+           int carry=0;
+           counter++;
+           for(int j=n1-1;j>=0;j--)
+           {
+               int x=(s1[j]-'0')*(s2[i]-'0') + carry;
+              
+               carry=x/10;
+               x=x%10;
+               temp.push_back('0'+x);
+            //   cout<<x;
+           }
+        //   cout<<temp;
+           if(carry!=0)
+           temp.push_back('0'+carry);
+        //   cout<<temp;
+           carry=0;
+           int temp1=0;
+           int ans1=counter;
+           
+           while(ans1<ans.size() && temp1<temp.size())
+           {
+               int x=ans[ans1]-'0' +temp[temp1]-'0' + carry;
+            //   cout<<x;
+               ans[ans1]='0' + x%10;
+               carry=x/10;
+               ans1++;
+               temp1++;
+           }
+        //   cout<<temp[0]-'0'<<" ";
+            while(ans1<ans.size())
+           {
+               int x=ans[ans1]-'0' +carry;
+               ans[ans1]='0' + x%10;
+               carry=x/10;
+               ans1++;
+           }
+           while(temp1<temp.size())
+           {
+               int x=temp[temp1]-'0' +carry;
+            //   cout<<x;
+               ans.push_back('0' + x%10);
+            //   cout<<ans;
+               carry=x/10;
+               temp1++;
+           }
+           if(carry!=0)
+           ans.push_back('0' + carry);
+           
+        //   return temp;
+        // cout<<ans;
+       }
+    //   cout<<ans;
+    reverse(ans.begin(),ans.end());
+    string fin;
+    int i=0;
+    while(i<ans.size())
+    {
+        if(ans[i]!='0')
+        break;
+        i++;
+    }
+    if(flag==1)
+    fin.push_back('-');
+    while(i<ans.size())
+    { 
+        fin.push_back(ans[i]);
+        i++;
+    }
+    return fin;
+    }
+};
