@@ -1,0 +1,50 @@
+Problem GFG (Medium)
+
+Longest K unique characters substring
+
+Question link: https://practice.geeksforgeeks.org/problems/longest-k-unique-characters-substring0853/1
+
+
+Complexity: 
+
+Method1: Sliding Window
+
+Time Complexity=O(2*n)
+
+Space Complexity=O(min(n,k)).
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution{
+  public:
+    int longestKSubstr(string s, int k) {
+    // your code here
+    int i=0;
+    int j=0;
+    int n=s.size();
+    int ans=-1;
+    map<char,int>mp;
+    while(j<n)
+    {
+        mp[s[j]]=j;
+        if(mp.size()>k)
+        {
+            while(i<j && mp.size()>k)
+            {
+                if(mp[s[i]]<=i)
+                mp.erase(s[i]);
+                i++;
+            }
+        }
+        ans=max(ans,j-i+1);
+        j++;
+    }
+    if(mp.size()<k)
+    return -1;
+    return ans;
+    }
+};
