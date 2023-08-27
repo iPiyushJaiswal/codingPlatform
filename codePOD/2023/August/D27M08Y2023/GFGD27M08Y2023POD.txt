@@ -1,0 +1,39 @@
+Problem GFG (Basic)
+
+Reverse a String
+
+Question link: https://practice.geeksforgeeks.org/problems/reverse-a-string/1
+
+Complexity: 
+
+Method1: Traversal
+
+Time Complexity=O(n)
+
+Space Complexity=O(1).
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution
+{
+    public:
+    string reverseWord(string str)
+    {
+        // Your code goes here
+        int h=str.size()-1;
+        int l=0;
+        while(l<h)
+        {
+            char temp=str[l];
+            str[l]=str[h];
+            str[h]=temp;
+            l++;
+            h--;
+        }
+        return str;
+    }
+};
