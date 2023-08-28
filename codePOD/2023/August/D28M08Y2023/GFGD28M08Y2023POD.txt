@@ -1,0 +1,36 @@
+Problem GFG (Easy)
+
+Remove duplicate element from sorted Linked List
+
+Question link: https://practice.geeksforgeeks.org/problems/remove-duplicate-element-from-sorted-linked-list/1
+
+Complexity: 
+
+Method1: Traversal
+
+Time Complexity=O(n)
+
+Space Complexity=O(1).
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+Node *removeDuplicates(Node *head)
+{
+ // your code goes here
+ Node*temp1=head;
+ Node* temp2=head->next;
+ while(temp2!=NULL)
+ {
+     while(temp2!=NULL && temp1->data==temp2->data)
+     temp2=temp2->next;
+     temp1->next=temp2;
+     temp1=temp1->next;
+     if(temp2)
+     temp2=temp2->next;
+ }
+ return head;
+}
