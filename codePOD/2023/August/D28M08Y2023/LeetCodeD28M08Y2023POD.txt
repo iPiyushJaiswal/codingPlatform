@@ -1,0 +1,118 @@
+Problem Type: (Easy)
+
+225. Implement Stack using Queues
+
+
+Link: https://leetcode.com/problems/implement-stack-using-queues/description/
+
+---------------------------------------------------------------------------------------------------
+Solution:
+-------------------------------------
+
+# Approach
+
+C++  2 methods
+---------------------------------------
+
+# Complexity
+
+Method 1: 2 Queue
+
+T.C= 
+Push O(2n) 
+Pop  O(1)
+
+S.C= O(2n)
+
+-----------------------
+
+Method 2: 1 Queue
+
+T.C= 
+Push O(n) 
+Pop  O(1)
+
+S.C= O(n)
+
+
+*******************Code****************** IN C++......................
+
+Method 1: 2 Queue
+
+class MyStack {
+public:
+        queue<int>q1;
+        queue<int>q2;
+    MyStack() {
+        
+    }
+    
+    void push(int x) {
+        q1.push(x);
+        while(!q2.empty())
+        {
+            q1.push(q2.front());
+            q2.pop();
+        }
+        while(!q1.empty())
+        {
+            q2.push(q1.front());
+            q1.pop();
+        }
+    }
+    
+    int pop() {
+        if(q2.empty())
+        return -1;
+        int val=q2.front();
+        q2.pop();
+        return val;
+    }
+    
+    int top() {
+        return (q2.empty())?-1:q2.front();
+    }
+    
+    bool empty() {
+        return q2.empty();
+    }
+};
+
+-----------------------------------------------------
+
+Method 2: 1 Queue
+
+class MyStack {
+public:
+        queue<int>q1;
+    MyStack() {
+        
+    }
+    
+    void push(int x) {
+        int size=q1.size();
+        q1.push(x);
+        while(size>0)
+        {
+            q1.push(q1.front());
+            q1.pop();
+            size--;
+        }
+    }
+    
+    int pop() {
+        if(q1.empty())
+        return -1;
+        int val=q1.front();
+        q1.pop();
+        return val;
+    }
+    
+    int top() {
+        return (q1.empty())?-1:q1.front();
+    }
+    
+    bool empty() {
+        return q1.empty();
+    }
+};
