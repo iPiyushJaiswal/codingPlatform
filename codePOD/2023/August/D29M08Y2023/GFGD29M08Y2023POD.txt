@@ -1,0 +1,65 @@
+Problem GFG (Medium)
+
+Delete nodes having greater value on right
+
+
+Question link: https://practice.geeksforgeeks.org/problems/delete-nodes-having-greater-value-on-right/1
+
+Complexity: 
+
+Method1: Traversal
+
+Time Complexity=O(n)
+
+Space Complexity=O(1).
+
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+class Solution
+{
+    public:
+    Node* reverse(Node*curr)
+    {
+        Node* prev=NULL;
+        Node* nxt;
+        while(curr)
+        {
+            nxt=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=nxt;
+        }
+        return prev;
+    }
+    Node *compute(Node *head)
+    {
+        // your code goes here
+        if(!head)
+        return head;
+        head=reverse(head);
+        int maxi=head->data;
+        Node*prev=head;
+        Node*curr=head->next;
+        Node*nxt;
+        while(curr)
+        {
+            nxt=curr->next;
+            if(curr->data<maxi)
+            {
+                prev->next=nxt;
+                delete(curr);
+            }
+            else
+            {
+                prev=prev->next;
+                maxi=max(maxi,curr->data);
+            }
+            curr=nxt;
+        }
+        head=reverse(head);
+        return head;
+    }
