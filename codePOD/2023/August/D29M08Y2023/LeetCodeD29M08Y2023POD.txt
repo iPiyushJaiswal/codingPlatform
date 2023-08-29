@@ -1,0 +1,48 @@
+Problem Type: (Medium)
+
+2483. Minimum Penalty for a Shop
+
+
+Link: https://leetcode.com/problems/minimum-penalty-for-a-shop/description/
+
+---------------------------------------------------------------------------------------------------
+Solution:
+-------------------------------------
+
+# Approach
+
+C++  1 methods
+---------------------------------------
+
+# Complexity
+
+Method 1: Traversal 
+
+T.C= O(n)
+
+S.C= O(1)
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+    int bestClosingTime(string c) {
+        int n=c.size();
+        int sum=0;
+        int maxi=0;
+        int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            if(c[i]=='Y')
+            sum++;
+            else
+            sum--;
+            if(maxi<sum)
+            {
+                maxi=sum;
+                ans=i+1;
+            }
+        }
+        return ans;
+    }
+};
