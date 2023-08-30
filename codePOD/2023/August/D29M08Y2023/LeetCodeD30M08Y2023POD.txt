@@ -1,0 +1,46 @@
+Problem Type: (Hard)
+
+2366. Minimum Replacements to Sort the Array
+
+
+Link: https://leetcode.com/problems/minimum-replacements-to-sort-the-array/description/
+
+---------------------------------------------------------------------------------------------------
+Solution:
+-------------------------------------
+
+# Approach
+
+C++  1 methods
+---------------------------------------
+
+# Complexity
+
+Method 1: Greedy Maths. 
+
+T.C= O(n)
+
+S.C= O(1)
+
+*******************Code****************** IN C++......................
+
+class Solution {
+public:
+    long long minimumReplacement(vector<int>& nums) {
+        int n=nums.size();
+        long long maxi=nums[n-1];
+        long long ans=0;
+        for(int i=n-2;i>=0;i--)
+        {
+            if(nums[i]>maxi)
+            {
+                long long val=ceil(nums[i]*1.0/maxi);
+                ans+=val-1;
+                maxi=nums[i]/val;
+            }
+            else
+            maxi=nums[i];
+        }
+        return ans;
+    }
+};
