@@ -1,0 +1,72 @@
+Problem GFG (Easy)
+
+Delete a Node in Single Linked List
+
+
+Question link: https://practice.geeksforgeeks.org/problems/delete-a-node-in-single-linked-list/1
+
+Complexity: 
+
+Method 1: Without dummy Node.
+
+Time Complexity=O(n)
+
+Space Complexity=O(1).
+
+-----------------------------
+
+Method 2: With dummy Node.
+
+Time Complexity=O(n)
+
+Space Complexity=O(1).
+
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+Method 1: Without dummy Node.
+
+Node* deleteNode(Node *head,int x)
+{
+    //Your code here
+    if(x==1)
+    return head->next;
+    Node*temp=head;
+    x--;
+    while(temp && temp->next)
+    {
+        if(x==1)
+        {
+            Node* mark=temp->next;
+            temp->next=temp->next->next;
+            delete(mark);
+        }
+        x--;
+        temp=temp->next;
+    }
+    return head;
+}
+------------------------------------------------
+Method 2: With dummy Node.
+
+Node* deleteNode(Node *head,int x)
+{
+    //Your code here
+    Node* dummy=new Node(-1);
+    dummy->next=head;
+    Node*temp=dummy;
+    while(temp && temp->next)
+    {
+        if(x==1)
+        {
+            Node* mark=temp->next;
+            temp->next=temp->next->next;
+            delete(mark);
+        }
+        x--;
+        temp=temp->next;
+    }
+    return dummy->next;
+}
