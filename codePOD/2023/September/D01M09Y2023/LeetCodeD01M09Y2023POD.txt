@@ -1,0 +1,66 @@
+Problem LeetCode (Hard)
+
+338. Counting Bits
+
+
+Question link: https://leetcode.com/problems/counting-bits/?envType=daily-question&envId=2023-09-01
+
+Complexity: 
+
+Method 1: Maths
+
+Time Complexity=O(nlogn)
+
+Space Complexity=O(1). 
+
+--------------------------
+
+Method 2: DP maths
+
+Time Complexity=O(n)
+
+Space Complexity=O(1).Answer vector used as DP.
+ 
+----------------
+CODE IN C++ 
+---------------- 
+------------------------------------------------------------------------------------------------
+
+Method 1: Maths
+
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int>ans(n+1,0);
+        for(int i=1;i<=n;i++)
+        {
+                int count=0;
+                int j=i;
+                while(j>0)
+                {
+                    if(j%2!=0)
+                    count++;
+                    j/=2;
+                }
+                ans[i]=count;
+        }
+        return ans;
+    }
+};
+
+Method 2: DP maths.
+
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int>ans(n+1,0);
+        for(int i=1;i<=n;i++)
+        {
+            if(i%2==0)
+            ans[i]=ans[i/2];
+            else
+            ans[i]=ans[i-1]+1;
+        }
+        return ans;
+    }
+};
