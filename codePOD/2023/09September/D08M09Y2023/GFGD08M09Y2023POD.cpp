@@ -1,4 +1,4 @@
-/*Problem GFG (End)
+/*Problem GFG (Easy)
 
 Binary Tree to BST
 
