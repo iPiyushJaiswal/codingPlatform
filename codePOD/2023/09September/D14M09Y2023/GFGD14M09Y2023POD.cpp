@@ -9,7 +9,7 @@ Logic: DP
 
 Complexity: 
 
-Method 1: Recurssion
+Method 1: Recursion
 
 Time Complexity=O(2^n)
 
@@ -45,7 +45,7 @@ CODE IN C++
 ---------------- 
 ------------------------------------------------------------------------------------------------
 
-Method : Maths
+Method : DP
 */
 
 class Solution{
