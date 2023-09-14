@@ -107,7 +107,7 @@ class Solution{
         // }
         // return dp[0][sum];
         
-        // memoization
+        // space optimization
         vector<int>dp(sum+1,0);
         vector<int>temp(sum+1,0);
         dp[0]=1;
