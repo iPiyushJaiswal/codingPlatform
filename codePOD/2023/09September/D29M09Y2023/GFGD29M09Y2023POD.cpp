@@ -7,7 +7,7 @@ Question link: https://practice.geeksforgeeks.org/problems/number-of-enclaves/1
 
 ---------------------------
 
-Logic: Iteration
+Logic: DFS + BFS
 
 ---------------------------
 
@@ -21,7 +21,7 @@ Time Complexity=O(n*m*4)
 Space Complexity=O(m*n) visited vector + O(m*n) recursive stack.
 
 -----------------------------
-Method 1: BFS
+Method 2: BFS
 
 Time Complexity=O(n*m*4)
 
@@ -87,8 +87,6 @@ class Solution {
 
 /*----------------------------------------------------------
 Method 2: BFS */
-
-// User function Template for C++
 
 class Solution {
   public:
