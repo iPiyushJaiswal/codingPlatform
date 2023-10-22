@@ -7,11 +7,11 @@ Question link: https://practice.geeksforgeeks.org/problems/maximum-sum-increasin
 
 ---------------------------
 
-Logic: Combination + Maths
+Logic: DP
 
 ---------------------------
 
-Complexity: 
+Complexity: DP
 
 
 Method 1 : Recursion
@@ -47,7 +47,7 @@ CODE IN C++
 ---------------- 
 ------------------------------------------------------------------------------------------------
 
-Method 1 : Combination + Maths
+Method 1 : DP
 */
 
 class Solution{
