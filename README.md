@@ -67,5 +67,4 @@ We welcome contributions from the community to make this repository even more va
 - **GeeksforGeeks** [here](https://auth.geeksforgeeks.org/user/tamas_jai/practice).
 
 
-
-                                                **Happy coding and problem-solving!**
+ **Happy coding and problem-solving!**
