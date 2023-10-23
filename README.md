@@ -6,9 +6,9 @@ Welcome to the "Problem of the Day Solutions" repository! In this repository, yo
 
 - [Introduction](#introduction)
 - [Problem Sources](#problem-sources)
-- [Folder Structure](#folder-structure)
+- [Repository Organization](#repository-organization)
 - [Contributing](#contributing)
-- [License](#license)
+- [Coding Profile](#coding-profile)
 
 ## Introduction
 
@@ -18,17 +18,19 @@ For each problem, you will find both brute-force and optimized solutions. Brute-
 
 We also provide details about the time and space complexity of each solution. Understanding the computational cost of your code is crucial when designing efficient algorithms.
 
+
 ## Problem Sources
 
 - **LeetCode**: LeetCode is a popular platform for practising coding problems. You can find their website [here](https://leetcode.com/).
 
 - **GeeksforGeeks**: GeeksforGeeks is an educational and learning platform that provides a wide range of programming challenges and resources. You can find their website [here](https://www.geeksforgeeks.org/).
+  
 
 ## Repository Organization
 
 This repository is organized as follows:
 
-- **codingPlatform**: Within this folder, you'll discover solutions to daily programming challenges from LeetCode and GeeksforGeeks.
+  - **codingPlatform**: Within this folder, you'll discover solutions to daily programming challenges from LeetCode and GeeksforGeeks.
 
   - Inside the `codingPlatform` folder, you'll encounter a folder named `codePOD`.
     
@@ -47,8 +49,6 @@ This repository is organized as follows:
 This structure allows you to easily navigate and find solutions to daily coding challenges from different sources while keeping them organized and accessible. 
 
 
-
-
 ## Contributing
 
 We welcome contributions from the community to make this repository even more valuable. If you would like to contribute your own problem solutions or improve existing ones, please follow these steps:
@@ -60,6 +60,11 @@ We welcome contributions from the community to make this repository even more va
 5. Update the README.md file in the problem's folder to explain the problem and the solutions.
 6. Include the time and space complexities of each solution.
 7. Commit your changes and create a pull request.
+
+## Coding Profile
+
+- **LeetCode** [here](https://leetcode.com/codepiyush1/).
+- **GeeksforGeeks** [here](https://auth.geeksforgeeks.org/user/tamas_jai/practice).
 
 
 
