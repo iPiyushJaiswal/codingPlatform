@@ -15,7 +15,7 @@ Complexity:
 
 Method  : Concept. Logic Array Traversal
 
-Time Complexity= O(q*16).
+Time Complexity= O(q*16)
 
 Space Complexity=O(1)
 
