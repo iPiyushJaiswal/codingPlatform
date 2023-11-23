@@ -16,14 +16,14 @@ Method 1: sorting
 
 Time Complexity=O(n*m*logn)
 
-Space Complexity=O(n*m)
+Space Complexity=O(n)
 
 --------------------------
 Method 2: Set
 
 Time Complexity=O(n*m)
 
-Space Complexity=O(n*m)
+Space Complexity=O(n)
 
 --------------------------
 ----------------
