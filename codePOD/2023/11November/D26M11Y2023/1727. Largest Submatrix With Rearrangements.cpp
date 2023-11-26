@@ -16,14 +16,14 @@ Complexity:
 
 Method 1: notUpdate input matrix + dp vector + sorting
 
-Time Complexity=O(n*logm + n*m )
+Time Complexity=O(n*mlogm + n*m )
 
 Space Complexity=O(2m)
 
 --------------------------
 Method 2: Update input matrix + sorting
 
-Time Complexity=O(n*logm + n*m )
+Time Complexity=O(n*mlogm + n*m )
 
 Space Complexity=O(1)
 
