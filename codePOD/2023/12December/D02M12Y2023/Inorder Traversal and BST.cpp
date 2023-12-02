@@ -7,7 +7,7 @@ Question link: https://www.geeksforgeeks.org/problems/inorder-traversal-and-bst5
 
 ---------------------------
 
-Logic: Array Traversal
+Logic: Array Traversal (Inorder of BST  must be in increasing order because inorder traverse left->root->right)
 
 ---------------------------
 
