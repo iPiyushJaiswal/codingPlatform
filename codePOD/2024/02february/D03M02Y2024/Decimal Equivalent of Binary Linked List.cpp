@@ -7,7 +7,7 @@ Question link:	https://www.geeksforgeeks.org/problems/decimal-equivalent-of-bina
 
 ---------------------------
 
-Logic: LL 
+Logic: LL.
 
 ---------------------------
 
